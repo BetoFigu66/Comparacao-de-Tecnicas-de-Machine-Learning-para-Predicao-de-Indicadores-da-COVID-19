@@ -1,0 +1,15 @@
+.history/
+DataSources/
+venv/
+Scripts/__pycache__/
+Scripts/logs/
+requirements_v*
+Models/__pycache__/*
+ Data/Processed/
+Data/Processed
+Models/trainedModels/
+Scripts/test_ibge_fixed.py
+Scripts/test_ibge_processing.py
+Scripts/test_pib.py
+Visualizacoes/
+logs/
