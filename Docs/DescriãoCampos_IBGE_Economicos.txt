@@ -1,0 +1,970 @@
+	Temas disponíveis			
+				
+	1. RECURSOS HUMANOS POR VÍNCULO			
+	2. HABITAÇÃO			
+	3. TRANSPORTE			
+	4. AGROPECUÁRIA			
+	5. MEIO AMBIENTE			
+	6. GESTÃO DE RISCOS E DE DESASTRES			
+	7. COVID-19			
+	8. VARIÁVEIS EXTERNAS			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais - 2020			
+				
+CodMun:	Código do município			
+UF:	Unidade da Federação			
+Cod UF:	Código da Unidade da Federação			
+Mun:	Nome Município			
+Faixa_pop:	Faixa populção			
+Regiao:	Região			
+				
+	1. RECURSOS HUMANOS POR VÍNCULO			
+	1.1 Composição do quadro de pessoal da administração direta			
+	1.2 Composição do quadro de pessoal da administração indireta			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais - 2020			
+				
+	1. RECURSOS HUMANOS POR VÍNCULO			
+	1.1 Composição do quadro de pessoal da administração direta			
+MREH0111:		Estatutários		
+MREH0112:		Celetistas		
+MREH0113:		Somente comissionados		
+MREH0114:		Estagiários		
+MREH0115:		Sem vínculo permanente		
+MREH0116:	Total¹			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+	(1) Inclusive os sem declaração de vínculo.			
+	(*) Não soube informar - sabe que existe, mas não soube informar.			
+				
+	1.2 Composição do quadro de pessoal da administração indireta			
+MREH02:	Administração indireta - existência			
+MREH0311:			Estatutários	
+MREH0312:			Celetistas	
+MREH0313:			Somente comissionados	
+MREH0314:			Estagiários	
+MREH0315:			Sem vínculo permanente	
+MREH0316:		Total¹		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+	(1) Inclusive os sem declaração de vínculo.			
+	(*) Não soube informar - sabe que existe, mas não soube informar.			
+				
+	2. HABITAÇÃO			
+	2.1 Órgão gestor e plano municipal de habitação			
+	2.2 Conselho e fundo municipal de habitação			
+	2.3 Cadastro de famílias interessadas em programas habitacionais			
+	2.4 Favelas, cortiços e loteamentos irregulares			
+	2.5 Programas ou ações na área de habitação			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+				
+				
+	2. HABITAÇÃO			
+	2.1 Órgão gestor e plano municipal de habitação			
+MHAB01:	Caracterização do órgão gestor 			
+MHAB03:	Sexo do(a) titular do órgão gestor			
+MHAB04:	Idade do(a) titular do órgão gestor			
+MHAB05:	Cor/raça do(a) titular do órgão gestor			
+MHAB051:		Foi respondido pelo próprio titular do órgão gestor		
+MHAB06:	Escolaridade do(a) titular do órgão gestor			
+				
+MHAB07:	Plano Municipal de Habitação - existência			
+MHAB071:		O Plano Municipal de Habitação é articulado ao Plano Diretor		
+		Aspectos do Plano Municipal de Habitação		
+MHAB081:			Integrar as ações em habitação com as demais políticas urbanas e sociais de forma a garantir o direito à habitação como direito à cidade	
+MHAB082:			Garantir o melhor aproveitamento da infraestrutura instalada e das edificações existentes	
+MHAB083:			Promover a urbanização e recuperação física de favelas e loteamentos precários, bem como a regularização fundiária desses assentamentos e a melhoria das moradias existentes	
+MHAB084:			Garantir, no caso de necessidade de remoção de área de risco ou por necessidade de obra de urbanização, o atendimento habitacional das famílias a serem removidas	
+MHAB085:			Coibir novas ocupações por assentamentos habitacionais nas áreas inadequadas para essa finalidade	
+MHAB086:			Produção de novas unidades habitacionais de interesse social	
+MHAB087:			Articular as instâncias municipal, estadual e federal de política e financiamento habitacional, visando a otimização dos recursos disponíveis	
+MHAB088:			Priorizar ações nas áreas de risco	
+MHAB089:			Outros	
+				
+MHAB09:	O município realizou alguma Conferência Municipal de Habitação nos últimos 4 anos			
+MHAB091:		Foram consideradas como elementos de referência para a elaboração e desenvolvimento do Plano Municipal de Habitação as deliberações das conferências realizadas		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+	(2) Sem gestor - apesar de ter estrutura para a política, no momento da coleta da informação não tinha gestor nomeado.			
+				
+	2.2 Conselho e Fundo municipal de habitação			
+MHAB10:	Conselho Municipal de Habitação - existência			
+MHAB101b:		Ano de criação		
+MHAB102:		Formação do conselho		
+		Caráter do conselho		
+MHAB111:			Consultivo	
+MHAB112:			Deliberativo	
+MHAB113:			Normativo	
+MHAB114:			Fiscalizador	
+MHAB12:		Quantidade de reuniões realizadas nos últimos 12 meses		
+MHAB13:		Número de conselheiros (titulares e suplentes)		
+		Capacitação dos membros		
+MHAB141:			Periodicamente	
+MHAB142:			Ocasionalmente	
+MHAB143:			Não realiza	
+MHAB15:		Município disponibiliza infraestrutura 		
+MHAB1511:			Sala 	
+MHAB1512:			Computador	
+MHAB1513:			Impressora	
+MHAB1514:			Acesso à internet	
+MHAB1515:			Veículo	
+MHAB1516:			Telefone	
+MHAB1517:			Diárias	
+MHAB1518:			Dotação orçamentária própria	
+				
+MHAB16:	Fundo Municipal de Habitação - existência			
+MHAB161:		O conselho gestor do Fundo é o Conselho Municipal de Habitação 		
+MHAB17:		O fundo reúne todos os recursos orçamentários e de outras fontes destinados aos programas habitacionais		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	2.3 Cadastro de famílias interessadas em programas habitacionais			
+MHAB18:	Cadastro ou levantamento de famílias interessadas em programas habitacionais - existência			
+MHAB181:		Em que ano foi realizado		
+MHAB182:		O cadastro é informatizado		
+MHAB183:		O cadastro inclui a natureza do benefício habitacional pretendido pelas famílias		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	2.4 Favelas, cortiços e loteamentos irregulares			
+	Existem no município			
+MHAB191:		Favelas, mocambos, palafitas ou assemelhados		
+MHAB192:		Cortiços, casas de cômodos ou cabeças-de-porco		
+MHAB193:		Loteamentos irregulares e/ou clandestinos		
+MHAB194:		Ocupações de terrenos ou prédios por movimentos de moradia		
+MHAB195:		Nenhum dos itens		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	2.5 Programas ou ações na área de habitação			
+	Foram realizados pela prefeitura, no ano de 2018 e/ou 2019, programas ou ações de			
+MHAB201:		Construção de unidades habitacionais		
+MHAB202:		Aquisição de unidades habitacionais		
+MHAB203:		Melhoria de unidades habitacionais		
+MHAB204:		Oferta de material de construção		
+MHAB205:		Oferta de lotes		
+MHAB206:		Regularização fundiária		
+MHAB207:		Urbanização de assentamentos		
+MHAB208:		Nenhum dos programas ou ações		
+MHAB21:	A prefeitura tem algum programa que conceda o benefício do aluguel social			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	3. TRANSPORTE			
+	3.1 Órgão gestor e Plano Municipal de Transporte			
+	3.2 Conselho e Fundo Municipal de Transporte			
+	3.3 Serviços de transporte			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+				
+	3. TRANSPORTE			
+	3.1 Órgão gestor e Plano Municipal de Transporte			
+MTRA01:	Caracterização do órgão gestor 			
+MTRA03:	Sexo do(a) titular do órgão gestor			
+MTRA04:	Idade do(a) titular do órgão gestor			
+MTRA05:	Cor/raça do(a) titular do órgão gestor			
+MTRA051:		Foi respondido pelo próprio titular do órgão gestor		
+MTRA06:	Escolaridade do(a) titular do órgão gestor			
+				
+MTRA07:	Plano Municipal de Transporte - existência			
+		Aspectos do Plano Municipal de Transporte		
+MTRA081:			A política de circulação viária e de transportes do município	
+MTRA082:			A estrutura e a forma de organização do sistema de transporte de passageiros, bem como suas regras básicas de funcionamento	
+MTRA083:			A política tarifária	
+MTRA084:			A estrutura, a forma de organização e as normas de utilização do espaço viário de uso público	
+MTRA085:			O uso pelo pedestre e pelo ciclista do espaço viário de uso público	
+MTRA086:			A inclusão de pessoas com deficiência na rede viária e no sistema de transporte	
+MTRA087:			Outros	
+				
+MTRA09:	O município realizou alguma Conferência Municipal de Transporte nos últimos 4 anos			
+MTRA091:		Foram consideradas como elementos de referência para a elaboração e desenvolvimento do Plano Municipal de Transporte as deliberações das conferências realizadas		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+	(2) Sem gestor - apesar de ter estrutura para a política, no momento da coleta da informação não tinha gestor nomeado.			
+				
+	3.2 Conselho e Fundo municipal de transporte			
+MTRA10:	Conselho Municipal de Transporte - existência			
+MTRA101b:		Ano de criação		
+MTRA102:		Formação do conselho		
+		Caráter do conselho		
+MTRA111:			Consultivo	
+MTRA112:			Deliberativo	
+MTRA113:			Normativo	
+MTRA114:			Fiscalizador	
+MTRA12:		Quantidade de reuniões realizadas nos últimos 12 meses		
+MTRA13:		Número de conselheiros (titulares e suplentes)		
+		Capacitação dos membros		
+MTRA141:			Periodicamente	
+MTRA142:			Ocasionalmente	
+MTRA143:			Não realiza	
+MTRA15:		Município disponibiliza infraestrutura 		
+MTRA1511:			Sala 	
+MTRA1512:			Computador	
+MTRA1513:			Impressora	
+MTRA1514:			Acesso à internet	
+MTRA1515:			Veículo	
+MTRA1516:			Telefone	
+MTRA1517:			Diárias	
+MTRA1518:			Dotação orçamentária própria	
+				
+MTRA16:	Fundo Municipal de Transporte - existência			
+MTRA161:		O conselho gestor do Fundo é o Conselho Municipal de Transporte		
+MTRA17:		O fundo tem financiado ações e projetos para questões do transporte nos últimos 12 meses		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+	(*) Não soube informar - sabe que existe, mas não soube informar.			
+				
+	3.3 Serviços de transporte			
+	Serviços regulares de transporte de passageiros existentes no município			
+MTRA181:		Barco		
+MTRA182:		Metrô		
+MTRA183:		Mototáxi		
+MTRA184:		Táxi		
+MTRA185:		Trem		
+MTRA186:		Van		
+MTRA187:		Avião		
+MTRA188:		Serviço por aplicativo (Uber, Cabify, 99Taxi e outros)		
+MTRA189:		Nenhum dos relacionados		
+				
+MTRA19:	Transporte coletivo por ônibus intramunicipal			
+		Tipo de regulamentação		
+MTRA1911:			Concessão	
+MTRA192:				Concedida através de licitação
+MTRA1912:			Permissão	
+MTRA193:				Concedida através de licitação
+MTRA1913:			Autorização	
+MTRA1914:			Serviço prestado diretamente pela prefeitura	
+MTRA1915:			Não regulamentado	
+		Passageiros que possuem isenção formal da tarifa de ônibus		
+MTRA201:			Maiores de 60/65 anos	
+MTRA202:			Estudantes da rede pública	
+MTRA203:			Estudantes da rede privada	
+MTRA204:			Carteiros	
+MTRA205:			Pessoas com deficiência	
+MTRA206:			Policiais	
+MTRA207:			Professores	
+MTRA208:			Crianças menores de 5 anos	
+MTRA209:			Outros	
+MTRA2010:			Toda a população	
+MTRA2011:			Nenhum passageiro	
+MTRA21:		Frota de ônibus municipais adaptada para pessoas com deficiência ou mobilidade reduzida		
+		Tipo de adaptação adotada para o embarque e desembarque		
+MTRA221:			Piso baixo	
+MTRA222:			Piso alto com acesso realizado por plataforma de embarque/desembarque	
+MTRA223:			Piso alto equipado com plataforma elevatória veicular	
+MTRA224:			Não sabe	
+				
+MTRA23:	Transporte coletivo por ônibus intermunicipal			
+MTRA231:		Este transporte coletivo atende também ao deslocamento entre bairros, distritos, localidades dentro do município		
+				
+MTRA24:	Ciclovia no município			
+MTRA25:	Bicicletário no município			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	4. AGROPECUÁRIA			
+	4.1 Órgão gestor da política agropecuária			
+	4.2 Conselho Municipal de Desenvolvimento Rural			
+	4.3 Programas ou ações no setor agropecuário			
+	4.4 Programas para agroindústria e promoção e apoio a festividades e premiação			
+	4.5 Apoio às atividades agropecuárias			
+	4.6 Apoio ao associativismo			
+	4.7 Infraestrutura 			
+	4.8 Programa ou ação de aquisição de produtos e vacinação de rebanho, Serviço de Inspeção Municipal (SIM) e abatedouros			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+				
+	4. AGROPECUÁRIA			
+	4.1 Órgão gestor da política agropecuária			
+MAGR01:	Caracterização do órgão gestor 			
+MAGR03:	Sexo do(a) titular do órgão gestor			
+MAGR04:	Idade do(a) titular do órgão gestor			
+MAGR05:	Cor/raça do(a) titular do órgão gestor			
+MAGR051:		Foi respondido pelo próprio titular do órgão gestor		
+MAGR06:	Escolaridade do(a) titular do órgão gestor			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+	(2) Sem gestor - apesar de ter estrutura para a política, no momento da coleta da informação não tinha gestor nomeado.			
+				
+	4.2 Conselho Municipal de Desenvolvimento Rural			
+MAGR07:	Conselho Municipal de Desenvolvimento Rural - existência			
+MAGR071:		Ano de criação		
+MAGR072:		Formação do conselho		
+		Caráter do conselho		
+MAGR081:			Consultivo	
+MAGR082:			Deliberativo	
+MAGR083:			Normativo	
+MAGR084:			Fiscalizador	
+MAGR09:		Quantidade de reuniões realizadas nos últimos 12 meses		
+MAGR10:		Número de conselheiros (titulares e suplentes)		
+		Capacitação dos membros		
+MAGR111:			Periodicamente	
+MAGR112:			Ocasionalmente	
+MAGR113:			Não realiza	
+MAGR12:		Município disponibiliza infraestrutura 		
+MAGR1211:			Sala 	
+MAGR1212:			Computador	
+MAGR1213:			Impressora	
+MAGR1214:			Acesso à internet	
+MAGR1215:			Veículo	
+MAGR1216:			Telefone	
+MAGR1217:			Diárias	
+MAGR1218:			Dotação orçamentária própria	
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	4.3 Programas ou ações no setor agropecuário			
+	Programa ou ação de acesso facilitado aos produtores agropecuários desenvolvido pela prefeitura			
+MAGR131:		Sementes		
+			Forma de acesso	
+MAGR13111:				Distribuição gratuita
+MAGR13112:				Mais baratas
+MAGR13113:				A preço de mercado, porém financiadas
+MAGR13114:				Outra forma
+MAGR132:		Mudas		
+			Forma de acesso	
+MAGR13211:				Distribuição gratuita
+MAGR13212:				Mais baratas
+MAGR13213:				A preço de mercado, porém financiadas
+MAGR13214:				Outra forma
+MAGR133:		Adubos		
+			Forma de acesso	
+MAGR13311:				Distribuição gratuita
+MAGR13312:				Mais baratas
+MAGR13313:				A preço de mercado, porém financiadas
+MAGR13314:				Outra forma
+MAGR134:		Ração ou forragem		
+			Forma de acesso	
+MAGR13411:				Distribuição gratuita
+MAGR13412:				Mais baratas
+MAGR13413:				A preço de mercado, porém financiadas
+MAGR13414:				Outra forma
+MAGR135:		Alevinos		
+			Forma de acesso	
+MAGR13511:				Distribuição gratuita
+MAGR13512:				Mais baratas
+MAGR13513:				A preço de mercado, porém financiadas
+MAGR13514:				Outra forma
+MAGR136:		Outros insumos		
+				
+	Programa ou ação para disponibilizar maquinário aos produtores agropecuários desenvolvido pela prefeitura			
+MAGR141:		Cessão temporária gratuita		
+MAGR142:		Aluguel		
+MAGR143:		Outro		
+MAGR144:		Nenhum programa ou ação		
+				
+	A prefeitura desenvolve programa ou ação de estímulo à			
+MAGR151:		Agricultura orgânica		
+MAGR152:		Agricultura familiar		
+MAGR153:		Aquicultura		
+MAGR154:		Pesca		
+MAGR155:		Produção de hortas comunitárias		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	4.4 Programas para agroindústria e promoção e apoio a festividades e premiação			
+MAGR16:	A prefeitura desenvolve programa ou ação para estimular a agroindústria			
+				
+	A prefeitura promove ou apoia			
+MAGR171:		Festividades periódicas relacionadas à atividade agropecuária		
+MAGR172:		Premiação ou forma de reconhecimento aos melhores produtores agropecuários do município		
+				
+MAGR18:	A prefeitura desenvolve programa ou ação de prevenção contra problemas climáticos para o setor agropecuário			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	4.5 Apoio às atividades agropecuárias			
+	Órgão público que atue na assistência técnica e/ou extensão rural no município 			
+MAGR191:		Órgão municipal		
+MAGR192:		Órgão estadual		
+MAGR193:		Órgão federal		
+MAGR194:		Não existe		
+				
+MAGR20:	Instituições que prestam apoio às atividades agropecuárias, seja em assistência técnica, extensão rural ou áreas correlatas que possuem convênio com a prefeitura			
+				
+	Prestadores de serviços de assistência técnica e/ou extensão rural para o setor agropecuário, contratados ou parceiros da prefeitura			
+MAGR211:		Empresa Privada		
+MAGR212:		Organização não governamental		
+MAGR213:		Outro		
+MAGR214:		Não contratou		
+				
+	A prefeitura desenvolve programa ou ação			
+MAGR221:		De cunho social em apoio específico ao produtor agropecuário		
+			Área	
+MAGR22111:				Educação
+MAGR22112:				Saúde ou higiene
+MAGR22113:				Distribuição de alimentos
+MAGR22114:				Outra forma
+MAGR222:		Para fomentar o artesanato junto às comunidades rurais		
+			Área	
+MAGR22211:				Capacitação
+MAGR22212:				Apoio à comercialização
+MAGR22213:				Estímulo ao associativismo
+MAGR22214:				Outra
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	4.6 Apoio ao associativismo			
+	Entidades de associativismo ou representação de produtores agropecuários com registro oficial na prefeitura			
+MAGR231:		Sindicatos rurais		
+MAGR232:		Associações de produtores		
+MAGR233:		Cooperativas		
+MAGR234:		Não possui registro		
+				
+	Entidades de associativismo ou representação de produtores agropecuários que atuam no município			
+MAGR241:		Sindicatos rurais		
+MAGR242:		Associações de produtores		
+MAGR243:		Cooperativas		
+MAGR244:		Outras		
+MAGR245:		Nenhuma entidade		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	4.7 Infraestrutura 			
+	Infraestrutura de comercialização e exposição de produtos agropecuários existente no município			
+MAGR251:		Centro de comercialização		
+MAGR252:		Feiras		
+MAGR253:		Parque de exposição próprio para uso do produtor		
+MAGR254:		Centro de comercialização de produtos da extração vegetal		
+MAGR255:		Outra		
+MAGR256:		Nenhuma infraestrutura		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	4.8 Programa ou ação de aquisição de produtos e vacinação de rebanho, Serviço de Inspeção Municipal (SIM) e abatedouros			
+	Programa ou ação de aquisição de produtos agropecuários do município desenvolvidos pela prefeitura			
+MAGR261:		Aquisição diretamente dos produtores		
+MAGR262:		Aquisição através de entidades (associações, cooperativas etc.)		
+MAGR263:		Programa de Aquisição de Alimentos da Agricultura Familiar (PAA)		
+MAGR264:		Outro		
+MAGR265:		Nenhum programa ou ação		
+				
+	Programa ou ação para vacinação de rebanho			
+MAGR271:		Vacinação gratuita de rebanhos		
+MAGR272:		Acesso a vacinas mais baratas ou financiadas		
+MAGR273:		Outro		
+MAGR274:		Nenhum programa ou ação		
+				
+MAGR28:	O município possui o Serviço de Inspeção Municipal (SIM) implementado, de modo a controlar a qualidade dos produtos de origem animal			
+				
+MAGR29:	A prefeitura possui abatedouro municipal			
+MAGR291:		Abateu animal nos últimos 12 meses		
+				
+MAGR30:	A prefeitura tem conhecimento da existência da atividade de extração vegetal no município			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	5. MEIO AMBIENTE			
+	5.1 Órgão gestor do meio ambiente			
+	5.2 Recursos humanos na área do meio ambiente por vínculo e capacitação			
+	5.3 Conselho e Fundo municipal de Meio Ambiente			
+	5.4 Legislação ou instrumento de gestão ambiental  			
+	5.5 Plano de Gestão Integrada de Resíduos Sólidos			
+	5.6 Programas em parceria com o Governo Federal			
+	5.7 Pagamento de Serviços Ambientais			
+	5.8 Impacto Ambiental e/ou processo/ação que resulte em impacto no ambiente			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+				
+	5. MEIO AMBIENTE			
+	5.1 Órgão gestor do meio ambiente			
+MMAM01:	Caracterização do órgão gestor 			
+MMAM03:	Sexo do(a) titular do órgão gestor			
+MMAM04:	Idade do(a) titular do órgão gestor			
+MMAM05:	Cor/raça do(a) titular do órgão gestor			
+MMAM051:		Foi respondido pelo próprio titular do órgão gestor		
+MMAM06:	Escolaridade do(a) titular do órgão gestor			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+	(2) Sem gestor - apesar de ter estrutura para a política, no momento da coleta da informação não tinha gestor nomeado.			
+				
+	5.2 Capacitação			
+MMAM08:	Nos últimos quatro anos servidores do município participaram de capacitação promovida pelo governo federal na área de meio ambiente			
+	Em qual(is) área(s) temática(s) se deu(ram) essa(s) capacitação(ões)			
+MMAM091:		Estruturação da gestão municipal de meio ambiente		
+MMAM092:		Licenciamento		
+MMAM093:		Educação ambiental		
+MMAM094:		Educação ambiental voltada para a agricultura familiar		
+MMAM095:		Cadastro Ambiental Rural		
+MMAM096:		Resíduos Sólidos		
+MMAM097:		Produção e consumo sustentáveis		
+MMAM098:		Mudança do clima		
+MMAM099:		Recursos Hídricos		
+MMAM0910:		Participação social em fóruns e colegiados de meio ambiente		
+MMAM0911:		Outras		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	5.3 Conselho e Fundo municipal de meio ambiente			
+MMAM10:	Conselho Municipal de Meio Ambiente - existência			
+MMAM101b:		Ano de criação		
+MMAM102:		Formação do conselho		
+		Caráter do conselho		
+MMAM111:			Consultivo	
+MMAM112:			Deliberativo	
+MMAM113:			Normativo	
+MMAM114:			Fiscalizador	
+MMAM12:		Quantidade de reuniões realizadas nos últimos 12 meses		
+MMAM13:		Número de conselheiros (titulares e suplentes)		
+		Capacitação dos membros		
+MMAM141:			Periodicamente	
+MMAM142:			Ocasionalmente	
+MMAM143:			Não realiza	
+MMAM15:		Município disponibiliza infraestrutura 		
+MMAM1511:			Sala 	
+MMAM1512:			Computador	
+MMAM1513:			Impressora	
+MMAM1514:			Acesso à internet	
+MMAM1515:			Veículo	
+MMAM1516:			Telefone	
+MMAM1517:			Diárias	
+MMAM1518:			Dotação orçamentária própria	
+				
+MMAM16:	A área responsável pelo tema meio ambiente dispõe de recursos financeiros específicos para serem utilizados no desenvolvimento de suas ações			
+				
+MMAM17:	O município possui Fundo Municipal de Meio Ambiente ou similar			
+MMAM171:		O conselho gestor do Fundo é o Conselho Municipal de Meio Ambiente ou similar		
+MMAM18:		No ano de 2019 foi utilizado recurso do Fundo Municipal de Meio Ambiente para ações ambientais		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+	(*) Não soube informar - sabe que existe, mas não soube informar.			
+				
+	5.4 Legislação ou instrumento de gestão ambiental  			
+	Legislação ou instrumento de gestão ambiental existente no município, mesmo que esteja inserido na Lei Orgânica, Plano Diretor, Código Ambiental, etc			
+MMAM201:		Sobre coleta seletiva de resíduos sólidos domésticos		
+MMAM20011:			Ano de criação	
+MMAM202:		Sobre saneamento básico		
+MMAM2021:			Ano de criação	
+MMAM203:		Sobre gestão de bacias hidrográficas		
+MMAM2031:			Ano de criação	
+MMAM204:		Sobre área e/ou zona de proteção ou controle ambiental		
+MMAM2041:			Ano de criação	
+MMAM205:		Sobre destino das embalagens utilizadas em produtos agrotóxicos		
+MMAM2051:			Ano de criação	
+MMAM206:		Sobre poluição do ar		
+MMAM2061:			Ano de criação	
+MMAM207:		Sobre permissão de atividades extrativas minerais		
+MMAM2071:			Ano de criação	
+MMAM208:		Sobre fauna silvestre		
+MMAM2081:			Ano de criação	
+MMAM209:		Sobre florestas		
+MMAM2091:			Ano de criação	
+MMAM2010:		Sobre proteção à biodiversidade		
+MMAM20101:			Ano de criação	
+MMAM2011:		Sobre adaptação e mitigação de mudança do clima		
+MMAM20111:			Ano de criação	
+MMAM2012:		Nenhuma legislação citada		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	5.5 Plano de Gestão Integrada de Resíduos Sólidos			
+MMAM21:	O município possui Plano de Gestão Integrada de Resíduos Sólidos, nos termos da Política Nacional de Resíduos Sólidos			
+MMAM211:		Esse plano abrange apenas esse município		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	5.6 Programas em parceria com o Governo Federal			
+	Programas implementados pelo governo municipal em parceria com o Governo Federal			
+MMAM221:		Coletivo Educador		
+MMAM222:		Sala verde		
+MMAM223:		Circuito Tela Verde		
+MMAM224:		Etapa municipal da Conferência Infanto-Juvenil pelo Meio Ambiente		
+MMAM225:		Educação ambiental no Plano de Gestão Integrada de Resíduos Sólidos – PGIRS		
+MMAM226:		Sustentabilidade ambiental das instituições públicas, como a Agenda Ambiental na Administração Pública - A3P		
+MMAM227:		Programa de Educação Ambiental e Agricultura Familiar – PEAAF		
+MMAM228:		Etapa municipal da Conferência Nacional de Meio Ambiente		
+MMAM229:		Nenhum dos programas		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	5.7 Pagamento de Serviços Ambientais			
+MMAM23:	O município paga diretamente por serviços ambientais – PSA			
+		Fonte de recursos nos últimos 12 meses		
+MMAM2311:			Orçamento municipal	
+MMAM2312:			Governo Federal	
+MMAM2313:			Governo Estadual	
+MMAM2314:			Iniciativa privada	
+MMAM2315:			ONG	
+MMAM2316:			Doações	
+MMAM2317:			Outros	
+		Serviço(s) ambiental(is) abrangido(s)		
+MMAM241:			Pagamento por ações/iniciativas que promovam a conservação e a recuperação ou melhoramento da quantidade e da qualidade dos recursos hídricos	
+MMAM242:			Pagamento por ações/iniciativas de conservação e preservação da vegetação nativa e da vida silvestre	
+MMAM243:			Pagamento por ações/iniciativas que promovam a conservação, a recuperação ou preservação do ambiente natural nas áreas de Unidades de Conservação, em suas respectivas zonas de amortecimento e nas Terras Indígenas	
+MMAM244:			Pagamento por ações/iniciativas de recuperação e conservação dos solos e recomposição da cobertura vegetal e de áreas degradadas, através do plantio de espécies nativas em sistema agroflorestal	
+MMAM245:			Pagamento por ações/iniciativas de conservação de remanescentes da vegetação em áreas urbanas, de importância para a manutenção e melhoramento da qualidade do ar, dos recursos hídricos e da qualidade de vida da população	
+MMAM246:			Pagamento por ações/iniciativas que visem especificamente a captura e retenção de carbono, com objetivo de mitigação das mudanças climáticas (conservação/restauração de ecossistemas naturais, recuperação de áreas degradadas, e adoção de práticas de manejo	
+MMAM247:			Outros	
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	5.8 Impacto Ambiental e/ou processo/ação que resulte em impacto no ambiente			
+MMAM25:	Observação no município da ocorrência de algum impacto ambiental e/ou processo/ação que resulte em impacto no ambiente nos últimos 24 meses			
+		Impactos ambientais e/ou processos/ações de maior ocorrência		
+MMAM261:			Condições climáticas extremas (secas, enxurradas)	
+MMAM262:			Poluição do ar	
+MMAM263:			Poluição de algum corpo d’água	
+MMAM264:			Assoreamento de algum corpo d’água	
+MMAM265:			Diminuição de vazão de algum corpo d’água	
+MMAM266:			Desmatamentos	
+MMAM267:			Queimadas	
+MMAM268:			Contaminação do solo (por agrotóxicos, fertilizantes)	
+MMAM269:			Perda de solos por erosão e/ou desertificação (voçorocas, arenização)	
+MMAM2610:			Degradação de áreas legalmente protegidas	
+MMAM2611:			Diminuição da biodiversidade (fauna e flora)	
+MMAM2612:			Existência de moradia em situação de risco ambiental	
+MMAM2613:			Falta de saneamento (destinação inadequada do esgoto doméstico)	
+MMAM2614:			Outros	
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	6. GESTÃO DE RISCOS E DE DESASTRES			
+	6.1 Seca			
+	6.2 Alagamentos e processo erosivo			
+	6.3 Enchente ou inundação gradual			
+	6.4 Enxurrada ou inundação brusca			
+	6.5 Escorregamento ou deslizamento de encosta 			
+	6.6 Gerenciamento de riscos			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+				
+	6. GESTÃO DE RISCOS E DE DESASTRES			
+	6.1 Seca			
+MGRD01:	O município foi atingido pela seca nos últimos 4 anos			
+MGRD02:		Ano em que aconteceu a seca de maior impacto para o município		
+		No ano de seca de maior impacto para o município ocorreram		
+MGRD031:			Perdas financeiras	
+MGRD032:			Perdas humanas	
+MGRD033:			Perdas de animais	
+MGRD034:			Perdas ambientais	
+MGRD035:			Perda ou redução da produção agrícola	
+MGRD036:			Surgimento ou aumento de área de desertificação	
+MGRD037:			Concentração de poluentes na água exigindo ampliação na captação e no tratamento da água	
+MGRD038:			Outras	
+MGRD039:			Não sabe informar	
+		O que está sendo feito no município para evitar ou minimizar os danos causados pela seca		
+MGRD041:			Construção de cisternas	
+MGRD042:			Construção de açudes	
+MGRD043:			Construção de barragens	
+MGRD044:			Construção de poços	
+MGRD045:			Revegetação	
+MGRD046:			Incentivo público à agricultura adaptada ao clima e solo da região, com sistemas de irrigação	
+MGRD047:			Distribuição regular de água através de carros-pipa em épocas de estiagem (situações de emergência)	
+MGRD048:			Ações de uso sustentável dos recursos naturais (fontes de energia eólica ou solar, planos de bacia, programas de conscientização e sensibilização, etc.)	
+MGRD049:			Outras	
+MGRD0410:			Não sabe informar	
+				
+MGRD05:	O município possui Plano de Contingência e/ou Preservação para a seca			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	6.2 Alagamentos e processo erosivo			
+MGRD06:	O município foi atingido por alagamentos nos últimos 4 anos			
+MGRD07:	O município foi atingido por processo erosivo acelerado nos últimos 4 anos			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	6.3 Enchente ou inundação gradual			
+MGRD08:	O município foi atingido por enchentes ou inundações graduais nos últimos 4 anos			
+MGRD09:	Em que ano aconteceu a enchente ou inundação gradual de maior impacto para o município			
+	No ano de enchente ou inundação gradual de maior impacto para o município			
+MGRD101:		Edificações foram atingidas		
+MGRD1011:			Área atingida	
+MGRD102:		Pessoas foram desalojadas ou ficaram desabrigadas		
+MGRD1021:			Área de desalojamento ou desabrigo	
+MGRD103:		Ocorreram óbitos		
+MGRD1031:			Área dos óbitos	
+		Áreas do município em que ocorreram as enchentes ou inundações graduais		
+MGRD1041:			Naturalmente inundáveis	
+MGRD1042:			Não usualmente inundáveis	
+MGRD1043:			Com ocupações regulares	
+MGRD1044:			Com ocupações irregulares	
+MGRD1045:			Com existência de processo erosivo acelerado	
+MGRD1046:			Outras áreas	
+MGRD1047:			Não sabe	
+		Ações para evitar ou minimizar os danos causados por enchentes ou inundações graduais		
+MGRD1051:			Barragem à montante para equalização das cheias	
+MGRD1052:			Construção de canais de macrodrenagens	
+MGRD1053:			Construção de parque	
+MGRD1054:			Construção de reservatórios de amortecimento de cheias	
+MGRD1055:			Desassoreamento de corpos hídricos	
+MGRD1056:			Retificação de rios, aumento de calha ou desvio de cursos d’água	
+MGRD1057:			Realocação da população que vive em área de risco	
+MGRD1058:			Revegetação	
+MGRD1059:			Revitalização de rios ou bacias	
+MGRD10510:			Outra solução	
+MGRD10511:			Nenhuma intervenção	
+MGRD10512:			Não sabe	
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	6.4 Enxurrada ou inundação brusca			
+MGRD11:	O município foi atingido por enxurradas ou inundações bruscas nos últimos 4 anos			
+MGRD12:	Em que ano aconteceu a enxurrada ou inundação brusca de maior impacto para o município			
+	No ano de enxurrada ou inundação brusca de maior impacto para o município			
+MGRD131:		Edificações foram atingidas		
+MGRD1311:			Área atingida	
+MGRD132:		Pessoas foram desalojadas ou ficaram desabrigadas		
+MGRD1321:			Área de desalojamento ou desabrigo	
+MGRD133:		Ocorreram óbitos		
+MGRD1331:			Área dos óbitos	
+		Áreas do município em que ocorreram as enxurradas ou inundações bruscas		
+MGRD1341:			Naturalmente inundáveis	
+MGRD1342:			Não usualmente inundáveis	
+MGRD1343:			Com ocupações regulares	
+MGRD1344:			Com ocupações irregulares	
+MGRD1345:			Com existência de processo erosivo acelerado	
+MGRD1346:			Outras áreas	
+MGRD1347:			Não sabe	
+		Ações para evitar ou minimizar os danos causados por enxurradas ou inundações bruscas		
+MGRD1351:			Barragem à montante para equalização das cheias	
+MGRD1352:			Construção de canais de macrodrenagens	
+MGRD1353:			Construção de parque	
+MGRD1354:			Construção de reservatórios de amortecimento de cheias	
+MGRD1355:			Desassoreamento de corpos hídricos	
+MGRD1356:			Retificação de rios, aumento de calha ou desvio de cursos d’água	
+MGRD1357:			Realocação da população que vive em área de risco	
+MGRD1358:			Revegetação	
+MGRD1359:			Revitalização de rios ou bacias	
+MGRD13510:			Outra solução	
+MGRD13511:			Nenhuma intervenção	
+MGRD13512:			Não sabe	
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	6.5 Escorregamento ou deslizamento de encosta 			
+MGRD14:	O município foi atingido por escorregamentos ou deslizamentos de encostas nos últimos 4 anos			
+MGRD15:	Ano em que aconteceu o escorregamento ou deslizamento de encosta de maior impacto para o município			
+	No ano de escorregamento ou deslizamento de encosta de maior impacto para o município			
+MGRD161:		Edificações foram atingidas		
+MGRD1611:			Área atingida	
+MGRD162:		Pessoas foram desalojadas ou ficaram desabrigadas		
+MGRD1621:			Área de desalojamento ou desabrigo	
+MGRD163:		Ocorreram óbitos		
+MGRD1631:			Área dos óbitos	
+		Áreas do município em que ocorreram os escorregamentos ou deslizamentos de encostas		
+MGRD1641:			De taludes e encostas sujeitas a deslizamentos	
+MGRD1642:			Urbanas com processos erosivos crônicos	
+MGRD1643:			Sem infraestrutura de drenagem	
+MGRD1644:			Com ocupações regulares	
+MGRD1645:			Com ocupações irregulares	
+MGRD1646:			Sem ocupação	
+MGRD1647:			Outras áreas	
+MGRD1648:			Não sabe	
+		Ações para evitar ou minimizar os danos causados por escorregamentos ou deslizamentos de encostas		
+MGRD1651:			Estabilização e proteção de taludes	
+MGRD1652:			Retaludamento de encostas	
+MGRD1653:			Obras de contenção	
+MGRD1654:			Construção de canais de macrodrenagens	
+MGRD1655:			Realocação da população que vive em área de risco	
+MGRD1656:			Revegetação de encostas	
+MGRD1657:			Outra solução	
+MGRD1658:			Nenhuma intervenção	
+MGRD1659:			Não sabe	
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	6.6 Gerenciamento de riscos			
+	O município possui como instrumento de planejamento			
+MGRD171:		Plano Diretor que contemple a prevenção de enchentes ou inundações graduais, ou enxurradas ou inundações bruscas		
+MGRD172:		Lei de Uso e Ocupação do Solo que contemple a prevenção de enchentes ou inundações graduais, ou enxurradas ou inundações bruscas		
+MGRD173:		Lei específica que contemple a prevenção de enchentes ou inundações graduais, ou enxurradas ou inundações bruscas		
+MGRD174:		Plano Diretor que contemple a prevenção de escorregamentos ou deslizamentos de encostas		
+MGRD175:		Lei de Uso e Ocupação do Solo que contemple a prevenção de escorregamentos ou deslizamentos de encostas		
+MGRD176:		Lei específica que contemple a prevenção de escorregamentos ou deslizamentos de encostas		
+MGRD177:		Plano Municipal de Redução de Riscos		
+MGRD178:		Carta geotécnica de aptidão à urbanização		
+MGRD179:		Plano de implantação de obras e serviços para redução de riscos de desastres		
+MGRD1710:		Nenhum dos instrumentos		
+	Em relação ao gerenciamento de riscos de desastres decorrentes de enchentes ou inundações graduais, ou enxurradas ou inundações bruscas, o município possui			
+MGRD181:		Mapeamentos de áreas de risco de enchentes ou inundações		
+MGRD182:		Programa habitacional para realocação de população de baixa renda em área de risco (reassentamento em empreendimento de habitação de interesse social, pagamento de aluguel social ou similar, indenização de benfeitoria, compra de uma nova moradia, auxílio 		
+MGRD183:		Mecanismos de controle e fiscalização para evitar ocupação em áreas suscetíveis aos desastres		
+MGRD184:		Plano de Contingência		
+MGRD185:		Projetos de engenharia relacionados ao evento		
+MGRD186:		Sistema de alerta antecipado de desastres		
+MGRD187:		Cadastro de risco		
+MGRD188:		Nenhum dos itens		
+MGRD19:	Em relação a gestão de riscos de desastres decorrentes de enchentes ou inundações graduais, ou enxurradas ou inundações bruscas, o município realiza limpeza periódica dos bueiros da cidade, especialmente, antes do período de chuvas			
+	Em relação ao gerenciamento de riscos de desastres decorrentes de escorregamentos ou deslizamento de encostas, o município possui			
+MGRD201:		Mapeamentos de áreas de risco de enchentes ou inundações		
+MGRD202:		Programa habitacional para realocação de população de baixa renda em área de risco (reassentamento em empreendimento de habitação de interesse social, pagamento de aluguel social ou similar, indenização de benfeitoria, compra de uma nova moradia, auxílio 		
+MGRD203:		Mecanismos de controle e fiscalização para evitar ocupação em áreas suscetíveis aos desastres		
+MGRD204:		Plano de Contingência		
+MGRD205:		Projetos de engenharia relacionados ao evento		
+MGRD206:		Sistema de alerta antecipado de desastres		
+MGRD207:		Cadastro de risco		
+MGRD208:		Nenhum dos itens		
+	Em relação à gestão de riscos e de desastres, existe no município			
+MGRD211:		Unidade do Corpo de Bombeiros		
+MGRD212:		Coordenação Municipal de Proteção e Defesa Civil (COMPDEC) ou órgão similar		
+MGRD213:		Núcleo de Defesa Civil (NUDECs)		
+MGRD214:		Guarda Municipal		
+MGRD215:		Nenhuma das citadas		
+MGRD216:		Não sabe		
+	Em relação a Coordenação Municipal de Proteção e Defesa Civil (COMPDEC) ou órgão similar			
+MGRD221:		O responsável pela coordenação atua exclusivamente nesta função		
+MGRD222:		Realiza ações articuladas e coordenadas do Sistema Municipal de Proteção e Defesa Civil		
+MGRD223:		Conhece o Sistema Integrado de Informações sobre Desastres - S2ID		
+MGRD224:		Utiliza sistema próprio na área de Proteção e Defesa Civil		
+MGRD225:		Há previsão de recursos para ações de proteção e defesa civil na Lei Orçamentária Anual		
+MGRD226:		Há outras fontes de recursos para ações de proteção e defesa civil		
+MGRD227:		Dispõe de espaço físico exclusivo		
+MGRD228:		Dispõe de viatura		
+MGRD229:		Dispõe de computadores		
+MGRD2210:		Dispõe de GPS		
+MGRD2211:		Dispõe de coletes		
+MGRD2212:		Dispõe de servidores com vínculo empregatício		
+MGRD2213:		Dispõe de sistema de alerta antecipado de desastres		
+MGRD2214:		Nenhum dos itens citados		
+MGRD2215:		Não sabe informar		
+	Atividades de proteção de defesa civil			
+MGRD231:		Práticas educativas voltadas para conscientização e percepção da situação de risco nas escolas		
+MGRD232:		Práticas educativas voltadas para conscientização e percepção da situação de risco nas comunidades		
+MGRD233:		Educação ambiental nas escolas		
+MGRD234:		Educação ambiental nas comunidades		
+MGRD235:		Campanhas para conscientizar a população sobre os riscos de desastres		
+MGRD236:		Capacitação de profissionais de proteção e defesa civil		
+MGRD237:		Formação de NUDECs		
+MGRD238:		Nenhuma das citadas		
+MGRD239:		Não sabe informar		
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	7. COVID-19			
+	7.1 Medidas de isolamento social e barreiras sanitárias			
+	7.2 Ações realizadas durante a pandemia da COVID-19			
+	7.3 Ações de proteção social das famílias e indivíduos em situação de risco e/ou vulnerabilidade social durante a pandemia da COVID-19			
+	7.4 COVID-19 no município			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+				
+	7. COVID-19			
+	7.1 Medidas de isolamento social e barreiras sanitárias			
+MCOV01:	Foi adotada, por conta da pandemia da COVID-19, alguma medida de isolamento social no município			
+MCOV011c:		Mês de edição do decreto		
+MCOV02:	Utilizou algum sistema de monitoramento para avaliar a eficácia do isolamento social			
+MCOV03:	Foram instaladas barreiras sanitárias nas entradas do município durante o período da pandemia da COVID-19			
+		Ações realizadas nas barreiras		
+MCOV0311:			Informativa, com distribuição de folhetos sobre o COVID-19, principais sintomas, como é transmitido e como se proteger	
+MCOV0312:			Motoristas e passageiros são questionados sobre local de origem, qual o destino, a condição de saúde com a temperatura corporal aferida e os casos considerados suspeitos são repassados para acompanhamento nas unidades de saúde	
+MCOV0313:			Não permitem a entrada de pessoas que não comprovaram residência ou trabalho em área essencial	
+MCOV0314:			Outras ações	
+MCOV0315:			Não sabe informar	
+MCOV04:	Adotou alguma medida para regulamentar sanções (multas, realização compulsória de exames etc.) em caso de desrespeito as normas de isolamento social			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	7.2 Ações realizadas durante a pandemia da COVID-19			
+MCOV051:	Realizou a desinfecção de bairros e locais públicos do município			
+MCOV052:	Distribuiu máscaras para a população em locais públicos			
+MCOV053:	Adotou o uso obrigatório de máscaras em transportes públicos, locais públicos e comércios			
+MCOV054:	Recomendou o uso de máscaras em transportes públicos, locais públicos e comércios			
+MCOV055:	Ampliou os serviços on-line para atender a população			
+MCOV056:	Antecipou o 13º salário dos servidores			
+MCOV057:	Realizou testagem da população para a COVID-19			
+MCOV058:	Adquiriu testes para testagem da população para a COVID-19			
+MCOV059:	Fez seleção pública em caráter de urgência para profissionais de saúde que atuaram no combate ao COVID-19			
+MCOV0510:	Distribuiu cestas básicas ou crédito alimentar para as famílias de estudantes matriculados na rede pública municipal e creches parceiras			
+MCOV0511:	Mesmo com as escolas da rede pública fechadas, manteve o funcionamento dos refeitórios com o intuito de ofertar merenda para os alunos matriculados			
+MCOV0512:	Realizou operação de fiscalização de preços de produtos utilizados como prevenção ao coronavírus como álcool em gel e máscaras			
+MCOV0513:	Suspendeu a cobrança da dívida ativa, incluindo certidões de dívida ativa, atos de ajuizamento de execuções financeiras e atos de inscrição de dívida ativa			
+MCOV0514:	Outras ações			
+MCOV0515:	Não realizou nenhuma ação relacionada a pandemia da COVID-19			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	7.3 Ações de proteção social das famílias e indivíduos em situação de risco e/ou vulnerabilidade social durante a pandemia da COVID-19			
+MCOV061:	Distribuiu kits de higiene (álcool em gel, papel higiênico, sabonete, creme dental e escovas de dentes)			
+MCOV062:	Distribuiu kits de limpeza (sacos de lixo, sabão em pedra, água sanitária ou desinfetante)			
+MCOV063:	Distribuiu máscaras			
+MCOV064:	Distribuiu cestas básicas ou crédito alimentar para as famílias que recebem Bolsa Família			
+MCOV065:	Distribuiu cestas básicas ou crédito alimentar para a população que foi atingida economicamente pela pandemia e não estava inscrita no Bolsa Família			
+MCOV066:	Criou locais emergenciais (com oferta de refeições, higienização, triagem médica e atendimento psicossocial) de acolhimento provisório para a população em situação de rua			
+MCOV067:	Ofertou espaços descentralizados de higienização para a população em situação de rua			
+MCOV068:	Criou pontos de acolhimento para a população em situação de rua			
+MCOV069:	Organizou pontos de recebimento de doações de alimentos, roupas, produtos de higiene, produtos de limpeza e outros			
+MCOV0610:	Cadastrou famílias e indivíduos no Cadastro Único e Programa Bolsa Família para acesso aos programas sociais e de proteção social			
+MCOV0611:	Cadastrou indivíduos para recebimento do auxílio emergencial do governo federal			
+MCOV0612:	Cadastrou indivíduos para recebimento do auxílio emergencial concedido pelo município			
+MCOV0613:	Ampliou a cobertura para concessão de benefícios eventuais			
+MCOV0614:	Viabilizou a concessão de benefícios eventuais para a população atingida economicamente pela pandemia			
+MCOV0615:	Viabilizou a manutenção do funcionamento dos CRAS e CREAS			
+MCOV0616:	Garantiu a manutenção do funcionamento das unidades de acolhimento municipais, independente do público atendido			
+MCOV0617:	Garantiu a manutenção do funcionamento com atenção redobrada para as instituições de longa permanência para idosos			
+MCOV0618:	Garantiu a continuidade de atendimentos aos doentes crônicos monitorando este grupo em especial por conta das vulnerabilidades e risco aumentado			
+MCOV0619:	Monitorou violência doméstica e outros tipos de violência durante a pandemia			
+MCOV0620:	Manteve as Unidades do Centro de Atenção Psicossocial (CAPS) em funcionamento			
+MCOV0621:	Outras ações			
+MCOV0622:	Não realizou nenhuma ação relacionada a pandemia da COVID-19			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	7.4 COVID-19 no município			
+MCOV07:	Ocorreram casos confirmados clinicamente ou laboratorialmente de COVID-19 no município			
+MCOV08:	Houve a instalação de tendas de triagem para o combate da COVID-19, no município			
+MCOV09:	Dentre as pessoas que contraíram a COVID-19, houve alguma com necessidade de internação			
+MCOV10:	O número de internações ultrapassou a capacidade de leitos e de unidades de tratamento intensivo (UTI) públicos ou privados conveniados ao SUS, existentes no município durante a pandemia da COVID-19?			
+MCOV11:	O número de leitos foi ampliado para atender à demanda por internação no município em virtude da COVID-19			
+	A ampliação de leitos se deu por meio de			
+MCOV121:		Ampliação de estrutura própria		
+MCOV122:		Pactuação com outro município		
+MCOV123:		Pactuação com o estado		
+MCOV124:		Pactuação com o governo federal		
+MCOV125:		Contratação de leitos privados		
+MCOV126:		Não sabe informar		
+MCOV13:	Foi instalado hospital de campanha durante a pandemia da COVID-19 no município			
+MCOV14:	Nos casos de internação por COVID-19, houve necessidade de referenciar o(s) paciente(s) para outro município			
+MCOV15:	Durante o período da pandemia do COVID-19 foi necessário manter pessoas por mais de 24 horas em unidades sem internação			
+MCOV16:	Dentre as pessoas que contraíram a COVID-19, ocorreu algum óbito			
+MCOV17:	O município adotou alguma medida de rodízio na circulação de automóveis, motocicletas, ônibus ou outro transporte público ou privado no período da pandemia da COVID-19			
+				
+	Fonte: IBGE, Pesquisa de Informações Básicas Municipais – 2020			
+	Recusa - Foram considerados como recusa os municípios onde não foi possível contato com as prefeituras e os que não responderam até a data de encerramento da coleta.			
+				
+	8 Variáveis externas			
+CodMun:	Código do Município			
+Regiao:	Grande Região			
+Uf:	Unidade da Federação			
+Cod Uf:	Código da Unidade da Federação			
+Mun:	Nome do município			
+Populacao:	População estimada			
+Faixa_pop:	Faixa de população			
+				
+	*Estimativas da população residente nos municípios brasileiros com data de referência em 1º de julho de 2020.			

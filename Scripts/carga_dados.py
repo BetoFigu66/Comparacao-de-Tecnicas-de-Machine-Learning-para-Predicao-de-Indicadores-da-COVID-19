@@ -432,7 +432,7 @@ def process_pib_data(data_dir, processed_data_dir):
         rename_dict = {mun_col: 'CodMun'}
         for col in relevant_cols:
             if col != mun_col:
-                rename_dict[col] = f'PIB_{col.replace(" ", "_").replace("-", "_")}'
+                rename_dict[col] = f'ECONOMICOS_{col.replace(" ", "_").replace("-", "_")}'
         
         pib_data = pib_data.rename(columns=rename_dict)
         
@@ -450,7 +450,7 @@ def process_pib_data(data_dir, processed_data_dir):
         pib_data.to_csv(output_file, index=False)
         data_logger.info(f"Dados PIB salvos em: {output_file}")
         data_logger.info(f"Shape final PIB: {pib_data.shape}")
-        data_logger.info(f"Variáveis PIB criadas: {len([col for col in pib_data.columns if col.startswith('PIB_')])}")
+        data_logger.info(f"Variáveis ECONOMICOS criadas: {len([col for col in pib_data.columns if col.startswith('ECONOMICOS_')])}")
         
         return True
         
@@ -696,7 +696,6 @@ def process_and_save_data():
 
     ###################################################################################################################
     # Passo 2: Carregra os dados de casos e mortes por Covid e sumarizar de acordo com a necessidade do TCC:
-    # Status: Feito
     #       2.1. Número de casos e mortes por município ao final de 2020 (caso_full_final_2020)
     #       2.2. Número de casos e mortes por município ao final de 2024 (caso_full_final_2024)
     #       2.3. População estimada de cada município
@@ -794,7 +793,6 @@ def process_and_save_data():
 
     ###################################################################################################################
     # Passo 3: Fazer o merge das informações dos 2 datasets
-    # Status: Feito
     ###################################################################################################################
 
     df_eleitos_2016_filtrado_merged.shape[0]
@@ -1015,7 +1013,8 @@ def process_and_save_data():
                 columns=cols_to_dummify_present, 
                 drop_first=False, # Consistent with current general dummification in models.py
                 dummy_na=False,  # Não criar coluna para NaN pois já tratamos como 'Omitido'
-                dtype='int'
+                dtype='int',
+                prefix={col: f'ELEITORAIS_{col}' for col in cols_to_dummify_present}
             )
             
             # Normalizar nomes das colunas dummy criadas para UF-específico

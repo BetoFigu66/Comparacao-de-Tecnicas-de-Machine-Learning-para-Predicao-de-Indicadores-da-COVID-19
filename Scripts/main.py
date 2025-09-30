@@ -790,8 +790,12 @@ def handle_train_models_from_config():
         global CURRENT_DATA_CONTEXT, DATA_LOADED_FLAG
         global X_LOADED, Y_CASES_LOADED, Y_DEATHS_LOADED, FEATURE_NAMES_LOADED, SCALER_LOADED
         
+        # Verificar se há filtro de campos específicos
+        fields_to_consider = model_config.get('fields_to_consider', None)
+        
         # Verificar se os dados já estão carregados com o mesmo contexto
-        if DATA_LOADED_FLAG and CURRENT_DATA_CONTEXT == data_context:
+        # IMPORTANTE: Se há filtro de campos, sempre recarregar para aplicar o filtro
+        if DATA_LOADED_FLAG and CURRENT_DATA_CONTEXT == data_context and fields_to_consider is None:
             print(f"Reutilizando dados já carregados para contexto: {data_context}")
             X = X_LOADED
             y_cases = Y_CASES_LOADED
@@ -802,7 +806,21 @@ def handle_train_models_from_config():
             # Carregar novos dados
             try:
                 print(f"Carregando novos dados para contexto: {data_context}")
-                X, y_cases, y_deaths, feature_names, scaler, _ = load_and_prepare_data(uf_target=uf_target, include_ibge=True, include_pib=True)
+                
+                if fields_to_consider:
+                    print(f"  [FILTER] Aplicando filtro de campos específicos")
+                    for category, fields in fields_to_consider.items():
+                        if fields == ["*"]:
+                            print(f"    {category}: TODOS os campos")
+                        else:
+                            print(f"    {category}: {len(fields)} campos específicos")
+                
+                X, y_cases, y_deaths, feature_names, scaler, _ = load_and_prepare_data(
+                    uf_target=uf_target, 
+                    include_ibge=True, 
+                    include_pib=True,
+                    fields_to_consider=fields_to_consider
+                )
                 
                 # Armazenar os dados carregados para possível reutilização
                 X_LOADED = X
@@ -1143,10 +1161,22 @@ def handle_update_model_metrics():
             
             # Carregar dados correspondentes
             print(f"  [DATA] Carregando dados: {data_context}")
+            
+            # Verificar se há filtro de campos específicos
+            fields_to_consider = model_config.get('fields_to_consider', None)
+            if fields_to_consider:
+                print(f"  [FILTER] Aplicando filtro de campos específicos")
+                for category, fields in fields_to_consider.items():
+                    if fields == ["*"]:
+                        print(f"    {category}: TODOS os campos")
+                    else:
+                        print(f"    {category}: {len(fields)} campos específicos")
+            
             X, y_cases, y_deaths, feature_names, scaler, _ = load_and_prepare_data(
                 uf_target=uf_target, 
                 include_ibge=True, 
-                include_pib=True
+                include_pib=True,
+                fields_to_consider=fields_to_consider
             )
             
             # Determinar target variable
@@ -1306,7 +1336,10 @@ def handle_generate_feature_importance_csv():
 
 def handle_list_predictor_variables():
     """Lista todas as variáveis preditoras categorizadas"""
-    data_path = os.path.join(PROCESSED_DATA_DIR, 'df_final_2020.parquet')
+    # Definir caminho dos dados processados
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    processed_data_dir = os.path.join(project_root, 'Data', 'Processed')
+    data_path = os.path.join(processed_data_dir, 'df_final_2020.parquet')
     
     if not os.path.exists(data_path):
         print("❌ Arquivo de dados não encontrado. Execute a carga inicial primeiro.")
@@ -1355,7 +1388,7 @@ def handle_list_predictor_variables():
                 categories['Outras'].append(var)
         
         # Salvar lista completa
-        output_file = os.path.join(PROCESSED_DATA_DIR, f'predictor_variables_{datetime.now().strftime("%Y%m%d_%H%M")}.txt')
+        output_file = os.path.join(processed_data_dir, f'predictor_variables_{datetime.now().strftime("%Y%m%d_%H%M")}.txt')
         
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write("LISTA COMPLETA DE VARIÁVEIS PREDITORAS\n")
@@ -1393,7 +1426,10 @@ def handle_list_predictor_variables():
 
 def handle_correlation_analysis():
     """Analisa correlações entre variáveis preditoras e permite remoção de variáveis altamente correlacionadas"""
-    data_path = os.path.join(PROCESSED_DATA_DIR, 'df_final_2020.parquet')
+    # Definir caminho dos dados processados
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    processed_data_dir = os.path.join(project_root, 'Data', 'Processed')
+    data_path = os.path.join(processed_data_dir, 'df_final_2020.parquet')
     
     if not os.path.exists(data_path):
         print("❌ Arquivo de dados não encontrado. Execute a carga inicial primeiro.")
@@ -1468,102 +1504,173 @@ def handle_correlation_analysis():
         else:
             print("\n✅ Nenhuma correlação alta (>0.9) encontrada.")
         
-        # Salvar relatório
+        # Salvar relatório detalhado
         timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-        report_file = os.path.join(PROCESSED_DATA_DIR, f'correlation_analysis_{timestamp}.txt')
+        report_file = os.path.join(processed_data_dir, 'correlacao_variaveis.txt')
+        
+        # Criar lista completa de correlações ordenada por valor absoluto
+        all_correlations_detailed = []
+        for i in range(len(correlation_matrix.columns)):
+            for j in range(i+1, len(correlation_matrix.columns)):
+                var1 = correlation_matrix.columns[i]
+                var2 = correlation_matrix.columns[j]
+                corr_value = correlation_matrix.iloc[i, j]
+                if not pd.isna(corr_value):  # Ignorar NaN
+                    all_correlations_detailed.append((var1, var2, corr_value, abs(corr_value)))
+        
+        # Ordenar por correlação absoluta (maior para menor)
+        all_correlations_detailed.sort(key=lambda x: x[3], reverse=True)
         
         with open(report_file, 'w', encoding='utf-8') as f:
-            f.write("ANÁLISE DE CORRELAÇÃO ENTRE VARIÁVEIS PREDITORAS\n")
-            f.write("="*60 + "\n\n")
+            f.write("ANÁLISE COMPLETA DE CORRELAÇÃO ENTRE VARIÁVEIS PREDITORAS\n")
+            f.write("="*70 + "\n\n")
             f.write(f"Data/Hora: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Dataset: {df.shape[0]} linhas x {df.shape[1]} colunas\n")
-            f.write(f"Variáveis numéricas analisadas: {len(predictor_vars)}\n\n")
+            f.write(f"Variáveis numéricas analisadas: {len(predictor_vars)}\n")
+            f.write(f"Total de pares analisados: {len(all_correlations_detailed)}\n\n")
             
+            # Seção de correlações perfeitas
             f.write(f"CORRELAÇÕES PERFEITAS (|r| = 1.0): {len(perfect_correlations)}\n")
-            f.write("-" * 40 + "\n")
-            for i, (var1, var2, corr) in enumerate(perfect_correlations, 1):
-                f.write(f"{i:2d}. {var1} ↔ {var2} (r = {corr:.3f})\n")
+            f.write("-" * 50 + "\n")
+            if perfect_correlations:
+                for i, (var1, var2, corr) in enumerate(perfect_correlations, 1):
+                    f.write(f"{i:3d}. {var1}\n")
+                    f.write(f"     ↔ {var2}\n")
+                    f.write(f"     Correlação: {corr:.6f}\n\n")
+            else:
+                f.write("Nenhuma correlação perfeita encontrada.\n")
             
+            # Seção de correlações altas
             f.write(f"\nCORRELAÇÕES ALTAS (|r| > 0.9): {len(high_correlations)}\n")
-            f.write("-" * 40 + "\n")
-            for i, (var1, var2, corr) in enumerate(high_correlations, 1):
-                f.write(f"{i:2d}. {var1} ↔ {var2} (r = {corr:.3f})\n")
-        
-        print(f"\n📁 Relatório salvo em: {report_file}")
-        
-        # Opção interativa para remover variáveis
-        if perfect_correlations or high_correlations:
-            print("\n" + "="*60)
-            print("🛠️ REMOÇÃO INTERATIVA DE VARIÁVEIS CORRELACIONADAS")
-            print("="*60)
+            f.write("-" * 50 + "\n")
+            if high_correlations:
+                for i, (var1, var2, corr) in enumerate(high_correlations, 1):
+                    f.write(f"{i:3d}. {var1}\n")
+                    f.write(f"     ↔ {var2}\n")
+                    f.write(f"     Correlação: {corr:.6f}\n\n")
+            else:
+                f.write("Nenhuma correlação alta (>0.9) encontrada.\n")
             
-            all_correlations = perfect_correlations + high_correlations
-            variables_to_remove = []
+            # Seção com todas as correlações ordenadas
+            f.write(f"\nTODAS AS CORRELAÇÕES (ORDENADAS POR VALOR ABSOLUTO)\n")
+            f.write("-" * 50 + "\n")
+            f.write("Rank | Correlação | Variável 1 ↔ Variável 2\n")
+            f.write("-" * 50 + "\n")
             
-            for i, (var1, var2, corr) in enumerate(all_correlations, 1):
-                print(f"\n{i}. Correlação: {corr:.3f}")
-                print(f"   Variável 1: {var1}")
-                print(f"   Variável 2: {var2}")
+            for i, (var1, var2, corr, abs_corr) in enumerate(all_correlations_detailed[:100], 1):  # Top 100
+                f.write(f"{i:4d} | {corr:9.6f} | {var1} ↔ {var2}\n")
+            
+            if len(all_correlations_detailed) > 100:
+                f.write(f"\n... e mais {len(all_correlations_detailed) - 100} correlações.\n")
+        
+        print(f"\n📁 Relatório completo salvo em: {report_file}")
+        
+        # Remoção automática baseada em percentual
+        print("\n" + "="*70)
+        print("🛠️ REMOÇÃO AUTOMÁTICA DE VARIÁVEIS ALTAMENTE CORRELACIONADAS")
+        print("="*70)
+        
+        while True:
+            try:
+                threshold_input = input("\n📊 Digite o percentual mínimo para eliminação (ex: 99 para ≥0.99, ou 'sair'): ").strip()
                 
-                while True:
-                    choice = input("   Qual remover? (1/2/n=nenhuma/s=sair): ").strip().lower()
-                    if choice == '1':
-                        if var1 not in variables_to_remove:
-                            variables_to_remove.append(var1)
-                            print(f"   ✅ {var1} marcada para remoção")
-                        break
-                    elif choice == '2':
-                        if var2 not in variables_to_remove:
-                            variables_to_remove.append(var2)
-                            print(f"   ✅ {var2} marcada para remoção")
-                        break
-                    elif choice == 'n':
-                        print("   ⏭️ Nenhuma variável removida")
-                        break
-                    elif choice == 's':
-                        print("   🛑 Saindo da seleção")
-                        break
-                    else:
-                        print("   ❌ Opção inválida. Use 1, 2, n ou s")
-                
-                if choice == 's':
+                if threshold_input.lower() == 'sair':
+                    print("🛑 Saindo da análise de correlação.")
                     break
-            
-            # Aplicar remoções se houver
-            if variables_to_remove:
-                print(f"\n📋 RESUMO: {len(variables_to_remove)} variáveis marcadas para remoção:")
-                for var in variables_to_remove:
-                    print(f"   - {var}")
                 
-                confirm = input("\n❓ Confirma a remoção? (s/n): ").strip().lower()
+                threshold_percent = float(threshold_input)
+                if threshold_percent < 0 or threshold_percent > 100:
+                    print("❌ Percentual deve estar entre 0 e 100.")
+                    continue
+                
+                threshold_value = threshold_percent / 100.0
+                print(f"\n🔍 Analisando correlações ≥ {threshold_value:.3f} ({threshold_percent}%)...")
+                
+                # Encontrar todas as correlações acima do threshold
+                high_corr_pairs = []
+                for var1, var2, corr, abs_corr in all_correlations_detailed:
+                    if abs_corr >= threshold_value:
+                        high_corr_pairs.append((var1, var2, corr))
+                
+                if not high_corr_pairs:
+                    print(f"✅ Nenhuma correlação ≥ {threshold_value:.3f} encontrada.")
+                    continue
+                
+                print(f"\n📋 Encontradas {len(high_corr_pairs)} correlações ≥ {threshold_value:.3f}:")
+                print("-" * 60)
+                
+                # Determinar variáveis para remoção (estratégia: remover a segunda variável de cada par)
+                variables_to_remove = set()
+                for i, (var1, var2, corr) in enumerate(high_corr_pairs, 1):
+                    print(f"{i:3d}. {var1} ↔ {var2} (r = {corr:.6f})")
+                    # Estratégia: remover sempre a segunda variável (pode ser melhorada)
+                    variables_to_remove.add(var2)
+                
+                variables_to_remove = list(variables_to_remove)
+                
+                print(f"\n🎯 ESTRATÉGIA DE REMOÇÃO:")
+                print(f"   Total de pares correlacionados: {len(high_corr_pairs)}")
+                print(f"   Variáveis únicas para remoção: {len(variables_to_remove)}")
+                print("\n📝 Variáveis que serão removidas:")
+                for i, var in enumerate(sorted(variables_to_remove), 1):
+                    print(f"   {i:3d}. {var}")
+                
+                confirm = input(f"\n❓ Confirma a remoção de {len(variables_to_remove)} variáveis? (s/n): ").strip().lower()
+                
                 if confirm == 's':
+                    # Fazer backup do arquivo original
+                    original_parquet = data_path
+                    backup_timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M")
+                    backup_file = data_path.replace('.parquet', f'_{backup_timestamp}.parquet')
+                    
+                    print(f"\n💾 Fazendo backup do arquivo original...")
+                    import shutil
+                    shutil.copy2(original_parquet, backup_file)
+                    print(f"   Backup salvo: {backup_file}")
+                    
                     # Criar novo dataset sem as variáveis removidas
                     df_cleaned = df.drop(columns=variables_to_remove)
                     
-                    # Salvar dataset limpo
-                    cleaned_file = os.path.join(PROCESSED_DATA_DIR, f'df_final_2020_cleaned_{timestamp}.parquet')
-                    df_cleaned.to_parquet(cleaned_file, index=False)
+                    # Salvar novo dataset no lugar do original
+                    df_cleaned.to_parquet(original_parquet, index=False)
                     
-                    print(f"\n✅ Dataset limpo salvo: {cleaned_file}")
+                    print(f"\n✅ Dataset atualizado salvo: {original_parquet}")
                     print(f"   Original: {df.shape[1]} colunas")
                     print(f"   Limpo: {df_cleaned.shape[1]} colunas")
                     print(f"   Removidas: {len(variables_to_remove)} colunas")
                     
                     # Salvar lista de variáveis removidas
-                    removed_file = os.path.join(PROCESSED_DATA_DIR, f'removed_variables_{timestamp}.txt')
+                    removed_file = os.path.join(processed_data_dir, f'variaveis_removidas_{backup_timestamp}.txt')
                     with open(removed_file, 'w', encoding='utf-8') as f:
                         f.write("VARIÁVEIS REMOVIDAS POR ALTA CORRELAÇÃO\n")
-                        f.write("="*50 + "\n\n")
+                        f.write("="*60 + "\n\n")
                         f.write(f"Data/Hora: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-                        f.write(f"Total removidas: {len(variables_to_remove)}\n\n")
-                        for i, var in enumerate(variables_to_remove, 1):
-                            f.write(f"{i:2d}. {var}\n")
+                        f.write(f"Threshold utilizado: ≥ {threshold_value:.3f} ({threshold_percent}%)\n")
+                        f.write(f"Pares correlacionados encontrados: {len(high_corr_pairs)}\n")
+                        f.write(f"Variáveis removidas: {len(variables_to_remove)}\n")
+                        f.write(f"Backup do original: {backup_file}\n\n")
+                        
+                        f.write("PARES CORRELACIONADOS:\n")
+                        f.write("-" * 40 + "\n")
+                        for i, (var1, var2, corr) in enumerate(high_corr_pairs, 1):
+                            f.write(f"{i:3d}. {var1} ↔ {var2} (r = {corr:.6f})\n")
+                        
+                        f.write("\nVARIÁVEIS REMOVIDAS:\n")
+                        f.write("-" * 40 + "\n")
+                        for i, var in enumerate(sorted(variables_to_remove), 1):
+                            f.write(f"{i:3d}. {var}\n")
                     
-                    print(f"📁 Lista de variáveis removidas: {removed_file}")
+                    print(f"📁 Relatório de remoção salvo: {removed_file}")
+                    print(f"🔄 Execute novamente a análise para verificar o resultado!")
+                    break
+                    
                 else:
-                    print("❌ Remoção cancelada")
-            else:
-                print("\n📝 Nenhuma variável selecionada para remoção")
+                    print("❌ Remoção cancelada. Tente outro threshold.")
+                    
+            except ValueError:
+                print("❌ Por favor, digite um número válido ou 'sair'.")
+            except Exception as e:
+                print(f"❌ Erro: {e}")
         
     except Exception as e:
         print(f"❌ Erro na análise de correlação: {e}")

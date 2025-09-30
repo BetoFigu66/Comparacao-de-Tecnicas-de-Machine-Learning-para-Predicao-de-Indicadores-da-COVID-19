@@ -1,0 +1,36 @@
+{
+    "models": [
+        {
+            "name": "Decision Tree",
+            "type": "Árvore de Decisão",
+            "uf": null,
+            "parameters": {
+                "max_depth": [3, 7, 10, 20],
+                "min_samples_split": [2, 5, 10],
+                "min_samples_leaf": [1, 2, 4]
+            }
+        },
+        {
+            "name": "Random Forest",
+            "type": "Random Forest",
+            "uf": null,
+            "parameters": {
+                "n_estimators": [100, 200],
+                "max_depth": [10, 20, null],
+                "min_samples_split": [2, 5],
+                "min_samples_leaf": [1, 2, 4]
+            }
+        },
+        {
+            "name": "Neural Network",
+            "type": "Rede Neural (MLP)",
+            "uf": null,
+            "parameters": {
+                "hidden_layer_sizes": [[50], [100], [50, 50]],
+                "activation": ["relu", "tanh"],
+                "alpha": [0.0001, 0.001, 0.01],
+                "max_iter": [1000]
+            }
+        }
+    ]
+}

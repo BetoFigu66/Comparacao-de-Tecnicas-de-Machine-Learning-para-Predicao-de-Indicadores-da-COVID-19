@@ -96,7 +96,7 @@ def load_pib_features(project_root):
     
     pib_data = pd.read_csv(pib_file)
     model_logger.info(f"Loaded PIB data: {pib_data.shape}")
-    model_logger.info(f"PIB variables available: {len([col for col in pib_data.columns if col.startswith('PIB_')])}")
+    model_logger.info(f"ECONOMICOS variables available: {len([col for col in pib_data.columns if col.startswith('ECONOMICOS_')])}")
     
     return pib_data
 
@@ -272,7 +272,7 @@ def integrate_pib_with_covid_data(covid_data, pib_data, project_root):
     covid_data_norm['key_final'] = covid_data_norm['key'].apply(lambda x: synonyms.get(x, x))
     
     # Fazer merge
-    pib_columns = ['PIB_total', 'PIB_per_capita', 'atividade_principal', 'atividade_secundaria', 'atividade_terciaria']
+    pib_columns = ['ECONOMICOS_total', 'ECONOMICOS_per_capita', 'atividade_principal', 'atividade_secundaria', 'atividade_terciaria']
     merge_columns = ['key'] + pib_columns
     
     merged_data = covid_data_norm.merge(
@@ -289,7 +289,7 @@ def integrate_pib_with_covid_data(covid_data, pib_data, project_root):
     
     # Verificar sucesso da integração
     total_covid = len(covid_data)
-    matched_pib = merged_data['PIB_per_capita'].notna().sum()
+    matched_pib = merged_data['ECONOMICOS_per_capita'].notna().sum()
     match_rate = (matched_pib / total_covid) * 100
     
     model_logger.info(f"PIB integration results:")
@@ -303,18 +303,18 @@ def integrate_pib_with_covid_data(covid_data, pib_data, project_root):
     for col in activity_columns:
         if col in merged_data.columns:
             # Criar dummies para atividades econômicas
-            dummies = pd.get_dummies(merged_data[col], prefix=f'PIB_{col}', dummy_na=False)
+            dummies = pd.get_dummies(merged_data[col], prefix=f'ECONOMICOS_{col}', dummy_na=False)
             merged_data = pd.concat([merged_data, dummies], axis=1)
             # Remover coluna original
             merged_data = merged_data.drop(columns=[col])
     
-    # Contar novas features PIB
-    pib_features = [col for col in merged_data.columns if col.startswith('PIB_')]
-    model_logger.info(f"  Total PIB features added: {len(pib_features)}")
+    # Contar novas features ECONOMICOS
+    economicos_features = [col for col in merged_data.columns if col.startswith('ECONOMICOS_')]
+    model_logger.info(f"  Total ECONOMICOS features added: {len(economicos_features)}")
     
-    # Tratar valores NaN nas variáveis PIB
-    pib_numeric_cols = ['PIB_total', 'PIB_per_capita']
-    for col in pib_numeric_cols:
+    # Tratar valores NaN nas variáveis ECONOMICOS
+    economicos_numeric_cols = ['ECONOMICOS_total', 'ECONOMICOS_per_capita']
+    for col in economicos_numeric_cols:
         if col in merged_data.columns:
             # Substituir NaN por 0 ou pela mediana
             median_val = merged_data[col].median()
@@ -322,13 +322,13 @@ def integrate_pib_with_covid_data(covid_data, pib_data, project_root):
             model_logger.info(f"  Filled NaN in {col} with median: {median_val:.2f}")
     
     # Para variáveis dummy de atividade econômica, NaN significa ausência da categoria
-    for col in pib_features:
-        if col.startswith('PIB_atividade_'):
+    for col in economicos_features:
+        if col.startswith('ECONOMICOS_atividade_'):
             merged_data[col] = merged_data[col].fillna(0)
     
     return merged_data
 
-def load_and_prepare_data(uf_target=None, include_ibge=False, include_pib=False):
+def load_and_prepare_data(uf_target=None, include_ibge=False, include_pib=False, fields_to_consider=None):
     # Determine data path based on uf_target
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     if uf_target:
@@ -348,25 +348,37 @@ def load_and_prepare_data(uf_target=None, include_ibge=False, include_pib=False)
     
     # Load and integrate IBGE municipal variables if requested
     if include_ibge:
-        ibge_data = load_ibge_features(project_root)
-        if ibge_data is not None:
-            # Integrar dados IBGE usando código do município
-            dados = dados.merge(ibge_data, left_on='city_ibge_code', right_on='CodMun', how='left')
-            dados = dados.drop(columns=['CodMun'], errors='ignore')
-            model_logger.info(f"IBGE variables integrated. New dataset shape: {dados.shape}")
+        # Verificar se já existem colunas IBGE no dataset
+        ibge_columns_present = any(col.startswith('IBGE_') for col in dados.columns)
+        
+        if ibge_columns_present:
+            model_logger.info("IBGE variables already present in dataset. Skipping integration.")
         else:
-            model_logger.warning("IBGE data not available. Continuing without IBGE features.") 
+            ibge_data = load_ibge_features(project_root)
+            if ibge_data is not None:
+                # Integrar dados IBGE usando código do município
+                dados = dados.merge(ibge_data, left_on='city_ibge_code', right_on='CodMun', how='left')
+                dados = dados.drop(columns=['CodMun'], errors='ignore')
+                model_logger.info(f"IBGE variables integrated. New dataset shape: {dados.shape}")
+            else:
+                model_logger.warning("IBGE data not available. Continuing without IBGE features.") 
 
     # Load and integrate PIB municipal variables if requested
     if include_pib:
-        pib_data = load_pib_features(project_root)
-        if pib_data is not None:
-            # Integrar dados PIB usando código do município
-            dados = dados.merge(pib_data, left_on='city_ibge_code', right_on='CodMun', how='left')
-            dados = dados.drop(columns=['CodMun'], errors='ignore')
-            model_logger.info(f"PIB variables integrated. New dataset shape: {dados.shape}")
+        # Verificar se já existem colunas ECONOMICOS no dataset
+        economicos_columns_present = any(col.startswith('ECONOMICOS_') or 'economicos' in col.lower() for col in dados.columns)
+        
+        if economicos_columns_present:
+            model_logger.info("ECONOMICOS variables already present in dataset. Skipping integration.")
         else:
-            model_logger.warning("PIB data not available. Continuing without PIB features.")
+            economicos_data = load_pib_features(project_root)
+            if economicos_data is not None:
+                # Integrar dados ECONOMICOS usando código do município
+                dados = dados.merge(economicos_data, left_on='city_ibge_code', right_on='CodMun', how='left')
+                dados = dados.drop(columns=['CodMun'], errors='ignore')
+                model_logger.info(f"ECONOMICOS variables integrated. New dataset shape: {dados.shape}")
+            else:
+                model_logger.warning("ECONOMICOS data not available. Continuing without ECONOMICOS features.")
 
     df_features_for_segmentation = None # Initialize
 
@@ -401,8 +413,13 @@ def load_and_prepare_data(uf_target=None, include_ibge=False, include_pib=False)
     target_field_deaths = 'death_per_100k_inhabitants'
     target_field_cases = 'last_available_confirmed_per_100k_inhabitants'
     cols_to_drop_from_X = [target_field_cases, target_field_deaths]
-    if 'municipio' in dados.columns:
-        cols_to_drop_from_X.append('municipio')
+    
+    # Remover colunas identificadoras que não devem ser usadas como features
+    identifier_columns = ['municipio', 'city_ibge_code', 'uf', 'regiao', 'codigo_ibge']
+    for col in identifier_columns:
+        if col in dados.columns:
+            cols_to_drop_from_X.append(col)
+            model_logger.info(f"Removendo coluna identificadora: {col}")
     X_original_features = dados.drop(columns=cols_to_drop_from_X)
     y_cases = dados[target_field_cases]
     y_deaths = dados[target_field_deaths]
@@ -490,6 +507,85 @@ def load_and_prepare_data(uf_target=None, include_ibge=False, include_pib=False)
     # Garantir que todas as colunas são numéricas
     X_original_features = X_original_features.select_dtypes(include=[np.number])
     model_logger.info(f"Features após limpeza de tipos: {X_original_features.shape}")
+
+    # Aplicar filtro de campos se especificado
+    if fields_to_consider:
+        model_logger.info(f"\n{'='*60}")
+        model_logger.info("APLICANDO FILTRO DE CAMPOS ESPECÍFICOS")
+        model_logger.info(f"{'='*60}")
+        
+        original_columns = set(X_original_features.columns)
+        columns_to_keep = set()
+        
+        for dataset_category, field_list in fields_to_consider.items():
+            model_logger.info(f"\nProcessando categoria: {dataset_category}")
+            
+            if field_list == ["*"]:
+                # Manter todos os campos desta categoria
+                if dataset_category == "IBGE":
+                    category_columns = [col for col in original_columns if col.startswith('IBGE_')]
+                elif dataset_category == "ECONOMICOS":
+                    category_columns = [col for col in original_columns if col.startswith('ECONOMICOS_')]
+                elif dataset_category == "ELEITORAIS":
+                    # Estratégia 1: Procurar por prefixo ELEITORAIS_ (novo padrão)
+                    category_columns = [col for col in original_columns if col.startswith('ELEITORAIS_')]
+                    
+                    # Estratégia 2: Fallback para padrão antigo (até nova carga de dados)
+                    if len(category_columns) == 0:
+                        electoral_terms = ['partido', 'cor_raca', 'estado_civil', 'faixa_etaria', 'genero', 
+                                         'grau_de_instrucao', 'ocupacao', 'regiao', 'uf_']
+                        category_columns = [col for col in original_columns if 
+                                          any(term in col.lower() for term in electoral_terms)]
+                        model_logger.info(f"  FALLBACK - Usando padrão antigo para ELEITORAIS (sem prefixo)")
+                    
+                    # Log para debug
+                    model_logger.info(f"  DEBUG - Colunas eleitorais encontradas: {len(category_columns)}")
+                    if len(category_columns) > 0:
+                        model_logger.info(f"  DEBUG - Primeiras 5 colunas eleitorais: {list(category_columns)[:5]}")
+                else:
+                    # Categoria genérica - tentar identificar por prefixo
+                    category_columns = [col for col in original_columns if col.startswith(f'{dataset_category}_')]
+                
+                columns_to_keep.update(category_columns)
+                model_logger.info(f"  Mantendo TODOS os campos ({len(category_columns)} campos): {dataset_category}")
+                
+            else:
+                # Manter apenas campos específicos listados
+                specific_columns = [col for col in field_list if col in original_columns]
+                columns_to_keep.update(specific_columns)
+                model_logger.info(f"  Mantendo campos específicos ({len(specific_columns)} de {len(field_list)} listados):")
+                for col in specific_columns:
+                    model_logger.info(f"    ✅ {col}")
+                
+                # Listar campos não encontrados
+                missing_columns = [col for col in field_list if col not in original_columns]
+                if missing_columns:
+                    model_logger.warning(f"  Campos não encontrados ({len(missing_columns)}):")
+                    for col in missing_columns[:5]:  # Mostrar apenas os primeiros 5
+                        model_logger.warning(f"    ❌ {col}")
+                    if len(missing_columns) > 5:
+                        model_logger.warning(f"    ... e mais {len(missing_columns) - 5} campos")
+        
+        # Aplicar filtro
+        columns_to_keep = list(columns_to_keep)
+        columns_removed = original_columns - set(columns_to_keep)
+        
+        X_original_features = X_original_features[columns_to_keep]
+        
+        model_logger.info(f"\n📊 RESULTADO DO FILTRO:")
+        model_logger.info(f"  Campos originais: {len(original_columns)}")
+        model_logger.info(f"  Campos mantidos: {len(columns_to_keep)}")
+        model_logger.info(f"  Campos removidos: {len(columns_removed)}")
+        model_logger.info(f"  Shape final: {X_original_features.shape}")
+        
+        if len(columns_removed) > 0:
+            model_logger.info(f"\n🗑️ Primeiros campos removidos:")
+            for i, col in enumerate(sorted(list(columns_removed))[:10], 1):
+                model_logger.info(f"  {i:2d}. {col}")
+            if len(columns_removed) > 10:
+                model_logger.info(f"  ... e mais {len(columns_removed) - 10} campos")
+        
+        model_logger.info(f"{'='*60}\n")
 
     # Scale the features
     X_scaler = StandardScaler()
