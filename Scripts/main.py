@@ -698,10 +698,89 @@ def handle_train_all_models():
 
 def handle_train_models_from_config():
     """Treina múltiplos modelos baseado nas configurações do arquivo models_to_train.json"""
-    config_file = os.path.join(SCRIPT_DIR, 'models_to_train.json')
+    
+    # Buscar todos os arquivos models_to_train*.json no diretório
+    import glob
+    pattern = os.path.join(SCRIPT_DIR, 'models_to_train*.json')
+    config_files = glob.glob(pattern)
+    
+    if not config_files:
+        print("❌ Nenhum arquivo de configuração 'models_to_train*.json' encontrado")
+        logging.error("Nenhum arquivo models_to_train*.json encontrado")
+        input("\nPressione Enter para continuar...")
+        return
+    
+    # Ordenar arquivos por nome para apresentação consistente
+    config_files.sort()
+    
+    # Criar menu dinâmico
+    print("\n--- TREINAMENTO EM LOTE ---")
+    print("Arquivos de configuração disponíveis:")
+    print("-" * 70)
+    
+    for i, file_path in enumerate(config_files, 1):
+        filename = os.path.basename(file_path)
+        # Tentar ler informações básicas do arquivo para mostrar no menu
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                config_preview = json.load(f)
+                models_count = len(config_preview.get('models', []))
+                
+                # Analisar targets dos modelos
+                targets = [model.get('target', 'cases') for model in config_preview.get('models', [])]
+                has_deaths = 'deaths' in targets
+                has_cases = 'cases' in targets or any(t is None for t in targets)
+                
+                # Criar info sobre targets
+                if has_deaths and has_cases:
+                    target_info = " [MIXED]"
+                elif has_deaths:
+                    target_info = " [DEATHS]"
+                else:
+                    target_info = " [CASES]"
+                
+                # Mostrar tipos de modelos
+                model_types = [model.get('name', 'Unknown') for model in config_preview.get('models', [])]
+                model_summary = ', '.join(model_types[:3])  # Mostrar até 3 tipos
+                if len(model_types) > 3:
+                    model_summary += f", +{len(model_types)-3} mais"
+                
+                print(f"{i:2d}. {filename:<40} ({models_count} modelos{target_info})")
+                print(f"    └─ {model_summary}")
+                
+        except Exception as e:
+            print(f"{i:2d}. {filename:<40} (❌ erro ao ler arquivo)")
+            print(f"    └─ {str(e)[:50]}...")
+    
+    print(f"{len(config_files)+1:2d}. Cancelar")
+    print("-" * 70)
+    
+    # Solicitar escolha do usuário
+    while True:
+        try:
+            choice = input(f"\nEscolha o arquivo (1-{len(config_files)+1}): ").strip()
+            
+            if not choice:
+                continue
+                
+            choice_num = int(choice)
+            
+            if choice_num == len(config_files) + 1:
+                print("Operação cancelada.")
+                return
+            elif 1 <= choice_num <= len(config_files):
+                config_file = config_files[choice_num - 1]
+                config_filename = os.path.basename(config_file)
+                print(f"\n✅ Selecionado: {config_filename}")
+                break
+            else:
+                print(f"❌ Opção inválida. Digite um número entre 1 e {len(config_files)+1}")
+        except ValueError:
+            print("❌ Digite um número válido")
+    
     if not os.path.exists(config_file):
-        logging.error("Arquivo de configuração models_to_train.json não encontrado")
-        print("Erro: Arquivo de configuração não encontrado")
+        logging.error(f"Arquivo de configuração {config_filename} não encontrado")
+        print(f"Erro: Arquivo de configuração {config_filename} não encontrado")
         return
 
     try:
@@ -716,6 +795,20 @@ def handle_train_models_from_config():
     if not models:
         print("Nenhum modelo configurado para treinamento")
         return
+
+    # Verificar se algum modelo usa "deaths" como target
+    needs_death_rate = any(model.get('target') == 'deaths' for model in models)
+    
+    if needs_death_rate:
+        print("\n🔄 Detectado modelo(s) com target='deaths'. Recarregando dados com use_death_rate=True...")
+        try:
+            from carga_dados import process_and_save_data
+            process_and_save_data(use_death_rate_override=True)
+            print("✅ Dados recarregados com configuração para mortes")
+        except Exception as e:
+            print(f"❌ Erro ao recarregar dados: {e}")
+            logging.error(f"Erro ao recarregar dados com use_death_rate=True: {e}")
+            return
 
     print(f"\nEncontrados {len(models)} modelos para treinar...")
     
@@ -1225,6 +1318,266 @@ def handle_update_model_metrics():
     
     input("\nPressione Enter para continuar...")
 
+def handle_generate_performance_indicators_excel():
+    """Gera planilha Excel com indicadores de performance dos modelos treinados"""
+    
+    print("=== GERAR PLANILHA DE INDICADORES DE PERFORMANCE ===")
+    print("Coletando informações de performance dos modelos treinados...")
+    print()
+    
+    # Caminhos
+    trained_models_dir = os.path.join(PROJECT_ROOT, 'Models', 'trainedModels')
+    log_file = os.path.join(trained_models_dir, 'trained_models_log.json')
+    
+    if not os.path.exists(trained_models_dir):
+        print(f"[ERRO] Diretório {trained_models_dir} não encontrado!")
+        input("\nPressione Enter para continuar...")
+        return
+    
+    # Preparar dados para a planilha
+    performance_data = []
+    processed_count = 0
+    error_count = 0
+    
+    # Estratégia 1: Tentar ler do log JSON (se existir)
+    if os.path.exists(log_file):
+        print("[INFO] Encontrado trained_models_log.json - usando dados do log")
+        try:
+            with open(log_file, 'r', encoding='utf-8') as f:
+                model_logs = json.load(f)
+            
+            for model in model_logs:
+                try:
+                    model_info = {
+                        'Nome_Modelo': model.get('model_name', 'N/A'),
+                        'Tipo_Modelo': model.get('model_type', 'N/A'),
+                        'Variavel_Target': model.get('target_variable', 'N/A'),
+                        'Contexto_Dados': model.get('data_context', 'N/A'),
+                        'Timestamp': model.get('timestamp', 'N/A'),
+                        'Tempo_Treinamento_seg': model.get('training_time', 0),
+                        
+                        # Indicadores de Performance
+                        'R2_Treino': model.get('train_score_r2', None),
+                        'R2_Teste': model.get('test_score_r2', None),
+                        'MSE': model.get('mse', None),
+                        'RMSE': model.get('rmse', None),
+                        'MAE': model.get('mae', None),
+                        'MAPE': model.get('mape', None),
+                        
+                        # Parâmetros do modelo
+                        'Melhores_Parametros': str(model.get('best_parameters_found', {})),
+                        'Arquivo_Modelo': os.path.basename(model.get('saved_model_path', 'N/A')),
+                        
+                        # Informações adicionais
+                        'Total_Features': len(model.get('feature_importances', [])),
+                        'Top_3_Features': ', '.join([
+                            f"{feat['feature']}" 
+                            for feat in model.get('feature_importances', [])[:3]
+                        ]) if model.get('feature_importances') else 'N/A',
+                        
+                        # Informações técnicas
+                        'Fonte_Dados': 'Log JSON'
+                    }
+                    
+                    performance_data.append(model_info)
+                    processed_count += 1
+                    
+                except Exception as e:
+                    print(f"[AVISO] Erro ao processar modelo do log: {e}")
+                    error_count += 1
+                    continue
+        
+        except Exception as e:
+            print(f"[ERRO] Erro ao ler log JSON: {e}")
+            model_logs = []
+    else:
+        print("[INFO] Log JSON não encontrado")
+        print("[RECOMENDAÇÃO] Execute 'Atualizar métricas de modelos' primeiro para obter métricas completas")
+        model_logs = []
+    
+    # Estratégia 2: Se não há log, listar arquivos .joblib com informações básicas
+    import glob
+    joblib_pattern = os.path.join(trained_models_dir, '**', '*.joblib')
+    joblib_files = glob.glob(joblib_pattern, recursive=True)
+    
+    print(f"[INFO] Encontrados {len(joblib_files)} arquivos .joblib")
+    
+    # Se não temos dados do log, criar entradas básicas dos arquivos .joblib
+    if not performance_data:
+        print("[INFO] Criando entradas básicas a partir dos arquivos .joblib")
+        print("[AVISO] Métricas de performance não disponíveis - apenas informações básicas")
+        
+        for joblib_file in joblib_files:
+            try:
+                # Extrair informações do nome do arquivo
+                filename = os.path.basename(joblib_file)
+                filename_parts = filename.replace('.joblib', '').split('_')
+                
+                # Tentar extrair tipo de modelo e timestamp do nome
+                if len(filename_parts) >= 3:
+                    model_type = '_'.join(filename_parts[:-2])
+                    timestamp_part = '_'.join(filename_parts[-2:])
+                else:
+                    model_type = filename_parts[0] if filename_parts else 'Unknown'
+                    timestamp_part = 'Unknown'
+                
+                # Criar entrada básica sem métricas de performance
+                model_info = {
+                    'Nome_Modelo': filename.replace('.joblib', ''),
+                    'Tipo_Modelo': model_type,
+                    'Variavel_Target': 'N/A (Execute "Atualizar métricas" para obter)',
+                    'Contexto_Dados': 'N/A',
+                    'Timestamp': timestamp_part,
+                    'Tempo_Treinamento_seg': 0,
+                    
+                    # Indicadores de Performance (vazios)
+                    'R2_Treino': None,
+                    'R2_Teste': None,
+                    'MSE': None,
+                    'RMSE': None,
+                    'MAE': None,
+                    'MAPE': None,
+                    
+                    # Informações do arquivo
+                    'Melhores_Parametros': 'N/A',
+                    'Arquivo_Modelo': filename,
+                    'Total_Features': 0,
+                    'Top_3_Features': 'N/A',
+                    'Fonte_Dados': 'Arquivo .joblib (sem métricas)'
+                }
+                
+                performance_data.append(model_info)
+                processed_count += 1
+                
+            except Exception as e:
+                print(f"[AVISO] Erro ao processar {os.path.basename(joblib_file)}: {e}")
+                error_count += 1
+                continue
+    
+    print(f"\n[RESUMO] Processados: {processed_count}, Erros: {error_count}")
+    
+    if not performance_data:
+        print("[ERRO] Nenhum dado válido encontrado.")
+        input("\nPressione Enter para continuar...")
+        return
+    
+    # Criar DataFrame
+    try:
+        import pandas as pd
+        print(f"[INFO] Usando pandas versão: {pd.__version__}")
+        df = pd.DataFrame(performance_data)
+        
+        # Ordenar por R² de teste (decrescente) - tratamento manual de NaN para compatibilidade
+        # Primeiro, preencher NaN com um valor muito baixo para ordenação
+        df_sorted = df.copy()
+        df_sorted['R2_Teste_sort'] = df_sorted['R2_Teste'].fillna(-999)
+        df_sorted = df_sorted.sort_values('R2_Teste_sort', ascending=False)
+        df = df_sorted.drop('R2_Teste_sort', axis=1)
+        
+        # Gerar nome do arquivo com timestamp
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        excel_filename = f'performance_indicators_{timestamp}.xlsx'
+        excel_path = os.path.join(trained_models_dir, excel_filename)
+        
+        # Salvar como Excel com formatação - tentar diferentes engines
+        excel_engine = None
+        try:
+            # Tentar openpyxl primeiro
+            import openpyxl
+            excel_engine = 'openpyxl'
+        except ImportError:
+            try:
+                # Fallback para xlsxwriter
+                import xlsxwriter
+                excel_engine = 'xlsxwriter'
+            except ImportError:
+                # Se nenhum engine Excel disponível, usar CSV
+                excel_engine = None
+        
+        if excel_engine:
+            print(f"[INFO] Usando engine Excel: {excel_engine}")
+            with pd.ExcelWriter(excel_path, engine=excel_engine) as writer:
+                # Aba principal com todos os dados
+                df.to_excel(writer, sheet_name='Performance_Geral', index=False)
+                
+                # Aba resumo por tipo de modelo
+                numeric_cols = ['R2_Teste', 'MSE', 'MAE', 'Tempo_Treinamento_seg', 'Tamanho_Arquivo_KB']
+                agg_dict = {}
+                for col in numeric_cols:
+                    if col in df.columns:
+                        if col == 'Tempo_Treinamento_seg':
+                            agg_dict[col] = ['count', 'mean', 'sum']
+                        elif col == 'Tamanho_Arquivo_KB':
+                            agg_dict[col] = ['mean', 'max', 'min']
+                        else:
+                            agg_dict[col] = ['count', 'mean', 'max', 'min']
+                
+                if agg_dict:
+                    summary_by_type = df.groupby('Tipo_Modelo').agg(agg_dict).round(4)
+                    summary_by_type.columns = ['_'.join(col).strip() for col in summary_by_type.columns]
+                    summary_by_type.to_excel(writer, sheet_name='Resumo_por_Tipo')
+                
+                # Aba resumo por target
+                target_agg_dict = {}
+                for col in ['R2_Teste', 'MSE', 'MAE']:
+                    if col in df.columns:
+                        target_agg_dict[col] = ['count', 'mean', 'max', 'min']
+                
+                if target_agg_dict and 'Variavel_Target' in df.columns:
+                    summary_by_target = df.groupby('Variavel_Target').agg(target_agg_dict).round(4)
+                    summary_by_target.columns = ['_'.join(col).strip() for col in summary_by_target.columns]
+                    summary_by_target.to_excel(writer, sheet_name='Resumo_por_Target')
+                
+                # Aba com informações técnicas
+                tech_cols = ['Nome_Modelo', 'Arquivo_Modelo', 'Fonte_Dados', 'Total_Features']
+                available_tech_cols = [col for col in tech_cols if col in df.columns]
+                if available_tech_cols:
+                    tech_info = df[available_tech_cols].copy()
+                    tech_info.to_excel(writer, sheet_name='Info_Tecnica', index=False)
+            
+            print(f"[SUCCESS] Planilha Excel gerada com sucesso!")
+            print(f"[SAVE] Arquivo salvo em: {excel_path}")
+            print(f"[INFO] Total de modelos: {len(df)}")
+            print(f"[INFO] Abas criadas: Performance_Geral, Resumo_por_Tipo, Resumo_por_Target, Info_Tecnica")
+            
+            # Verificar se há métricas vazias e avisar
+            metrics_cols = ['R2_Treino', 'R2_Teste', 'MSE', 'RMSE', 'MAE', 'MAPE']
+            empty_metrics = []
+            for col in metrics_cols:
+                if col in df.columns and df[col].isna().all():
+                    empty_metrics.append(col)
+            
+            if empty_metrics:
+                print(f"\n[AVISO] Métricas vazias encontradas: {', '.join(empty_metrics)}")
+                print("[SOLUÇÃO] Execute 'Atualizar métricas de modelos' no menu principal")
+                print("          Depois execute novamente esta opção para obter métricas completas")
+            
+        else:
+            # Fallback para CSV se Excel não estiver disponível
+            print("[AVISO] Engines Excel não disponíveis. Gerando arquivo CSV...")
+            csv_filename = f'performance_indicators_{timestamp}.csv'
+            csv_path = os.path.join(trained_models_dir, csv_filename)
+            df.to_csv(csv_path, index=False, encoding='utf-8')
+            print(f"[SUCCESS] Arquivo CSV gerado: {csv_path}")
+        
+        # Mostrar top 5 modelos (independente do formato)
+        print(f"\n[TOP 5] Melhores modelos por R² de teste:")
+        top_5 = df.head(5)[['Nome_Modelo', 'Tipo_Modelo', 'Variavel_Target', 'R2_Teste', 'MSE', 'MAE']]
+        for idx, row in top_5.iterrows():
+            r2_value = row['R2_Teste']
+            if pd.isna(r2_value):
+                r2_str = "N/A"
+            else:
+                r2_str = f"{r2_value:.4f}"
+            print(f"  {row['Nome_Modelo']} ({row['Tipo_Modelo']}) - R²: {r2_str}")
+        
+    except Exception as e:
+        print(f"[ERRO] Erro ao gerar planilha: {e}")
+        import traceback
+        traceback.print_exc()
+    
+    input("\nPressione Enter para continuar...")
+
 def handle_generate_feature_importance_csv():
     """Gera CSV com feature importance de todos os modelos"""
     
@@ -1711,6 +2064,9 @@ def main_menu():
          "condition": lambda: True},
         {"text": "Gerar CSV com Feature Importance por modelo", 
          "handler": handle_generate_feature_importance_csv, 
+         "condition": lambda: True},
+        {"text": "Gerar planilha de indicadores de performance", 
+         "handler": handle_generate_performance_indicators_excel, 
          "condition": lambda: True},
         {"text": "Listar todas as variáveis preditoras", 
          "handler": handle_list_predictor_variables, 

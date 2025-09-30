@@ -1,0 +1,41 @@
+{
+    "models": [
+        {
+            "name": "SVM",
+            "type": "SVM (Support Vector Machine)",
+            "uf": null,
+            "parameters": {
+                "C": [0.1, 1.0, 10.0],
+                "kernel": ["rbf", "linear"],
+                "gamma": ["scale", "auto"]
+            },
+            "fields_to_consider": {
+                "IBGE": [
+                    "IBGE_COVID_19_Mcov0510_Nao",
+                    "IBGE_COVID_19_Mcov0515_Nao",
+                    "IBGE_COVID_19_Mcov052_Sim",
+                    "IBGE_COVID_19_Mcov059_Nao",
+                    "IBGE_COVID_19_Mcov059_Sim",
+                    "IBGE_COVID_19_Mcov0615_Sim",
+                    "IBGE_COVID_19_Mcov0621_Nao",
+                    "IBGE_COVID_19_Mcov121_Nao",
+                    "IBGE_COVID_19_Mcov16_Nao",
+                    "IBGE_COVID_19_Mcov16_Sim",
+                    "IBGE_COVID_19_Mcov17_Sim",
+                    "IBGE_Meio_ambiente_Mmam01_subordinado_executivo_orgao_gestor",
+                    "IBGE_Meio_ambiente_Mmam1516_Nao",
+                    "IBGE_Meio_ambiente_Mmam1516_Sim",
+                    "IBGE_Meio_ambiente_Mmam2010_Nao",
+                    "IBGE_Meio_ambiente_Mmam203_Nao",
+                    "IBGE_Meio_ambiente_Mmam21_Omitido",
+                    "IBGE_Meio_ambiente_Mmam226_Nao",
+                    "IBGE_Meio_ambiente_Mmam2315_Nao",
+                    "IBGE_Meio_ambiente_Mmam263_Nao",
+                    "IBGE_Meio_ambiente_Mmam264_Nao",
+                    "IBGE_Meio_ambiente_Mmam264_Sim"],
+                "ECONOMICOS": ["*"],
+                "ELEITORAIS": ["*"]                
+            }
+        }
+    ]
+}

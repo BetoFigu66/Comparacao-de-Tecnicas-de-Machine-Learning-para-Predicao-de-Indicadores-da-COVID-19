@@ -1,0 +1,80 @@
+{
+    "models": [
+        {
+            "name": "Decision Tree",
+            "type": "Árvore de Decisão",
+            "uf": null,
+            "parameters": {
+                "max_depth": [3, 7, 10, 20],
+                "min_samples_split": [2, 5, 10],
+                "min_samples_leaf": [1, 2, 4]
+            }
+        },
+        {
+            "name": "Random Forest",
+            "type": "Random Forest",
+            "uf": null,
+            "parameters": {
+                "n_estimators": [100, 200],
+                "max_depth": [10, 20, null],
+                "min_samples_split": [2, 5],
+                "min_samples_leaf": [1, 2, 4]
+            }
+        },
+        {
+            "name": "Neural Network",
+            "type": "Rede Neural (MLP)",
+            "uf": null,
+            "parameters": {
+                "hidden_layer_sizes": [[50], [100], [50, 50]],
+                "activation": ["relu", "tanh"],
+                "alpha": [0.0001, 0.001, 0.01],
+                "max_iter": [1000]
+            }
+        },
+        {
+            "name": "SVM",
+            "type": "SVM (Support Vector Machine)",
+            "uf": null,
+            "parameters": {
+                "C": [0.1, 1.0, 10.0],
+                "kernel": ["rbf", "linear"],
+                "gamma": ["scale", "auto"]
+            },
+            "fields_to_consider": {
+                "IBGE": [
+                    "IBGE_COVID_19_Mcov0510_Nao",
+                    "IBGE_COVID_19_Mcov0515_Nao",
+                    "IBGE_COVID_19_Mcov052_Sim",
+                    "IBGE_COVID_19_Mcov059_Nao",
+                    "IBGE_COVID_19_Mcov059_Sim",
+                    "IBGE_COVID_19_Mcov0615_Sim",
+                    "IBGE_COVID_19_Mcov0621_Nao",
+                    "IBGE_COVID_19_Mcov121_Nao",
+                    "IBGE_COVID_19_Mcov16_Nao",
+                    "IBGE_COVID_19_Mcov16_Sim",
+                    "IBGE_COVID_19_Mcov17_Sim",
+                    "IBGE_Meio_ambiente_Mmam01_subordinado_executivo_orgao_gestor",
+                    "IBGE_Meio_ambiente_Mmam1516_Nao",
+                    "IBGE_Meio_ambiente_Mmam1516_Sim",
+                    "IBGE_Meio_ambiente_Mmam2010_Nao",
+                    "IBGE_Meio_ambiente_Mmam203_Nao",
+                    "IBGE_Meio_ambiente_Mmam21_Omitido",
+                    "IBGE_Meio_ambiente_Mmam226_Nao",
+                    "IBGE_Meio_ambiente_Mmam2315_Nao",
+                    "IBGE_Meio_ambiente_Mmam263_Nao",
+                    "IBGE_Meio_ambiente_Mmam264_Nao",
+                    "IBGE_Meio_ambiente_Mmam264_Sim"],
+                "ECONOMICOS": ["*"],
+                "ELEITORAIS": ["regiao_SUL",
+                    "uf_BA",
+                    "uf_CE",
+                    "uf_ES",
+                    "uf_MA",
+                    "uf_MG",
+                    "uf_MT",
+                    "uf_SE"]
+            }
+        }
+    ]
+}

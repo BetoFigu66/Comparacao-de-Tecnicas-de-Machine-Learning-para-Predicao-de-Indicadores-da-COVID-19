@@ -529,7 +529,15 @@ def safe_rename_columns(df, column_mappings):
         data_logger.info("Nenhuma coluna foi renomeada (nenhuma encontrada)")
         return df
 
-def process_and_save_data():
+def process_and_save_data(use_death_rate_override=None):
+    # Configurar use_death_rate baseado no parâmetro ou variável global
+    global use_death_rate
+    if use_death_rate_override is not None:
+        use_death_rate = use_death_rate_override
+        data_logger.info(f"use_death_rate configurado via parâmetro: {use_death_rate}")
+    else:
+        data_logger.info(f"use_death_rate usando valor global: {use_death_rate}")
+    
     data_logger.info("Iniciando processo de carga e tratamento de dados...")
     # Define o diretório base do script para construção de caminhos relativos
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -769,10 +777,15 @@ def process_and_save_data():
            'estimated_population_2019', 'is_last', 'is_repeated', 'last_available_confirmed',
            'last_available_date', 'last_available_deaths', 'order_for_place',
            'place_type', 'new_confirmed', 'new_deaths']
+    
+    # SEMPRE criar death_per_100k_inhabitants (necessário para models.py)
+    caso_full_final_2020 ['death_per_100k_inhabitants'] = caso_full_final_2020 ['last_available_deaths'] / caso_full_final_2020 ['estimated_population_2019']
+    caso_full_final_2024 ['death_per_100k_inhabitants'] = caso_full_final_2024 ['last_available_deaths'] / caso_full_final_2024 ['estimated_population_2019']
+    
+    # Se use_death_rate = False, remover last_available_death_rate (usar apenas death_per_100k_inhabitants)
     if not use_death_rate:
-        caso_full_final_2020 ['death_per_100k_inhabitants'] = caso_full_final_2020 ['last_available_deaths'] / caso_full_final_2020 ['estimated_population_2019']
-        caso_full_final_2024 ['death_per_100k_inhabitants'] = caso_full_final_2024 ['last_available_deaths'] / caso_full_final_2024 ['estimated_population_2019']
         columns_to_drop.append('last_available_death_rate')
+    # Se use_death_rate = True, manter ambas as colunas (last_available_death_rate e death_per_100k_inhabitants)
     caso_full_final_2020 = caso_full_final_2020.drop(columns=columns_to_drop)
     # caso_full_final_2020.columns
     caso_full_final_2020.rename(columns={'city_upper': 'municipio', 'state': 'uf'}, inplace=True)
